@@ -22,7 +22,7 @@ class _Undefined {
 }
 const _u = const _Undefined();
 
-final guinnessb guinnessb = new guinnessb(
+final Guinnessb guinnessb = new Guinnessb(
     matchers: new UnitTestMatchers(),
     runner: unitTestRunner,
     initSpecs: unitTestInitSpecs);
