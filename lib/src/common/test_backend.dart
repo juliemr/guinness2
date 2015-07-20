@@ -99,8 +99,7 @@ class UnitTestMatchers implements Matchers {
       {Type anInstanceOf, Type type, Pattern message, Function where}) {
     final matcher = new ExceptionMatcher(
         anInstanceOf: anInstanceOf, type: type, message: message, where: where);
-    unit.expect(actual, unit.throwsA(matcher),
-        failureHandler: new NestedMatcherAwareFailureHandler());
+    unit.expect(actual, unit.throwsA(matcher));
   }
 
   void toBeFalsy(actual) =>
@@ -210,30 +209,6 @@ class ExceptionMatcher extends unit.Matcher {
 
     return description;
   }
-}
-
-/**
- * Checks if there is a nested matcher failure recorded in [matchState],
- * and includes it into an error message if it is the case.
- */
-class NestedMatcherAwareFailureHandler implements unit.FailureHandler {
-  void fail(String reason) => _handler.fail(reason);
-
-  void failMatch(actual, unit.Matcher matcher, String reason, Map matchState,
-      bool verbose) => _handler.failMatch(
-          actual, matcher, _reason(matchState, reason), matchState, verbose);
-
-  _reason(matchState, reason) => _hasNestedMatcherFailure(matchState)
-      ? _formatNestedMatcherFailure(matchState)
-      : reason;
-
-  _hasNestedMatcherFailure(matchState) => matchState.containsKey("state") &&
-      matchState["state"].containsKey("nestedMatcherFailure");
-
-  _formatNestedMatcherFailure(matchState) =>
-      "\nFailed Assertion:\n${matchState["state"]["nestedMatcherFailure"].message}";
-
-  get _handler => unit.getOrCreateExpectFailureHandler();
 }
 
 /// Matches when the object is verified by [_where]
