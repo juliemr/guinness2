@@ -13,7 +13,7 @@ part 'src/common/expect.dart';
 part 'src/common/spy.dart';
 part 'src/common/interfaces.dart';
 part 'src/common/guinness_config.dart';
-part 'src/common/unittest_backend.dart';
+part 'src/common/test_backend.dart';
 part 'src/common/exclusive_visitor.dart';
 part 'src/common/suite_info.dart';
 

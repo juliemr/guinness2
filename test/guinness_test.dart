@@ -4,7 +4,7 @@ import 'package:guinnessb/guinnessb_html.dart' as guinnessb;
 
 import 'common_test.dart' as common;
 import 'html/html_utils_test.dart' as htmlUtilsTest;
-import 'html/unittest_backend_test.dart' as unittest_backend;
+import 'html/test_backend_test.dart' as test_backend;
 
 void main() {
   guinnessb.guinnessbEnableHtmlMatchers();
@@ -12,5 +12,5 @@ void main() {
 
   common.main();
   htmlUtilsTest.main();
-  unittest_backend.main();
+  test_backend.main();
 }

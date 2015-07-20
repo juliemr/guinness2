@@ -9,7 +9,7 @@ export 'guinnessb.dart';
 part 'src/html/interfaces.dart';
 part 'src/html/expect.dart';
 part 'src/html/syntax.dart';
-part 'src/html/unittest_html_matchers.dart';
+part 'src/html/test_html_matchers.dart';
 
 void guinnessbEnableHtmlMatchers() {
   gns.guinnessb.matchers = new UnitTestMatchersWithHtml();
