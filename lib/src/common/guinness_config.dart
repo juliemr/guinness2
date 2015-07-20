@@ -1,6 +1,6 @@
 part of guinnessb;
 
-class guinnessb {
+class Guinnessb {
   Context _context = new Context();
   dynamic matchers;
   SpecRunner _runner;
@@ -8,7 +8,7 @@ class guinnessb {
   bool autoInit = true;
   bool showStats = false;
 
-  guinnessb({this.matchers, SpecRunner runner, SpecRunner initSpecs})
+  Guinnessb({this.matchers, SpecRunner runner, SpecRunner initSpecs})
       : _runner = runner,
         _initSpecs = initSpecs {
     _scheduleAutoInit();
