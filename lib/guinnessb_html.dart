@@ -1,7 +1,7 @@
 library guinnessb_html;
 
 import 'guinnessb.dart' as gns;
-import 'package:unittest/unittest.dart' as unit;
+import 'package:test/test.dart' as unit;
 import 'src/html_utils.dart' as htmlUtils;
 
 export 'guinnessb.dart';

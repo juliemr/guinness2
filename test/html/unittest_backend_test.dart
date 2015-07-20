@@ -4,7 +4,7 @@ import 'dart:html' as html;
 
 import 'package:dartmocks/dartmocks.dart';
 import 'package:guinnessb/guinnessb_html.dart' as guinnessb;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 import '../test_utils.dart';
 

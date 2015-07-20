@@ -1,7 +1,7 @@
 library guinnessb.test.exclusive_visitor_test;
 
 import 'package:guinnessb/guinnessb.dart' as guinnessb;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 import '../test_utils.dart';
 

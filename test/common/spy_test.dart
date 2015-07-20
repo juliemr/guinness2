@@ -1,7 +1,7 @@
 library guinnessb.test.spy_test;
 
 import 'package:guinnessb/guinnessb.dart' as guinnessb;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 class _SpyObject extends guinnessb.SpyObject {}
 

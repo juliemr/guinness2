@@ -1,7 +1,7 @@
 library guinnessb.test.syntax_test;
 
 import 'package:guinnessb/guinnessb.dart' as guinnessb;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 void main() {
   var context;

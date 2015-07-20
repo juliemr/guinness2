@@ -3,7 +3,7 @@ library guinnessb.test.integration_test;
 import 'dart:async';
 
 import 'package:guinnessb/guinnessb.dart' as guinnessb;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 class DummyVisitor implements guinnessb.SpecVisitor {
   List<Future> allFutures = [];

@@ -3,7 +3,7 @@ library guinnessb.test.html_utils_test;
 import 'dart:html';
 
 import 'package:guinnessb/src/html_utils.dart' as utils;
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 
 void main() {
   group("[toHtml]", () {
