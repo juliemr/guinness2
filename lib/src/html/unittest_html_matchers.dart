@@ -1,4 +1,4 @@
-part of guinness_html;
+part of guinnessb_html;
 
 class UnitTestMatchersConfig {
   Function preprocessHtml = (node) => node;

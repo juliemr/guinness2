@@ -1,9 +1,9 @@
-library guinness.test.spy_test;
+library guinnessb.test.spy_test;
 
-import 'package:guinness/guinness.dart' as guinness;
+import 'package:guinnessb/guinnessb.dart' as guinnessb;
 import 'package:unittest/unittest.dart';
 
-class _SpyObject extends guinness.SpyObject {}
+class _SpyObject extends guinnessb.SpyObject {}
 
 main() {
   group("[SpyObject]", () {
@@ -47,10 +47,10 @@ main() {
   });
 
   group("[SpyFunction]", () {
-    guinness.SpyFunction s;
+    guinnessb.SpyFunction s;
 
     setUp(() {
-      s = new guinness.SpyFunction("spy");
+      s = new guinnessb.SpyFunction("spy");
     });
 
     test("records the number of calls", () {

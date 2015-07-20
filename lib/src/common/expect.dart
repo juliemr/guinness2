@@ -1,4 +1,4 @@
-part of guinness;
+part of guinnessb;
 
 class Expect {
   final actual;
@@ -93,7 +93,7 @@ class Expect {
       _m.toHaveBeenCalledOnceWith(actual, a, b, c, d, e, f);
 
   void toHaveSameProps(expected) => _m.toHaveSameProps(actual, expected);
-  Matchers get _m => guinness.matchers;
+  Matchers get _m => guinnessb.matchers;
 }
 
 class NotExpect {
@@ -115,5 +115,5 @@ class NotExpect {
   void toHaveBeenCalledWith([a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) =>
       _m.notToHaveBeenCalledWith(actual, a, b, c, d, e, f);
   void toHaveSameProps(expected) => _m.notToHaveSameProps(actual, expected);
-  Matchers get _m => guinness.matchers;
+  Matchers get _m => guinnessb.matchers;
 }

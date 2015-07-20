@@ -1,6 +1,6 @@
-part of guinness_test;
+part of guinnessb_test;
 
-class _SpyObject extends guinness.SpyObject {}
+class _SpyObject extends guinnessb.SpyObject {}
 
 testSpy() {
   group("[SpyObject]", () {
@@ -44,10 +44,10 @@ testSpy() {
   });
 
   group("[SpyFunction]", () {
-    guinness.SpyFunction s;
+    guinnessb.SpyFunction s;
 
     setUp(() {
-      s = new guinness.SpyFunction("spy");
+      s = new guinnessb.SpyFunction("spy");
     });
 
     test("records the number of calls", () {

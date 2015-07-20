@@ -40,11 +40,11 @@ pub install
 echo -------------------
 echo Dart analyzer
 echo -------------------
-dartanalyzer lib/guinness_html.dart | grep "No issues found"
+dartanalyzer lib/guinnessb_html.dart | grep "No issues found"
 
 if [ $? -ne 0 ]; then
   echo Dart analyzer failed
-  dartanalyzer lib/guinness_html.dart
+  dartanalyzer lib/guinnessb_html.dart
   exit 1
 fi
 

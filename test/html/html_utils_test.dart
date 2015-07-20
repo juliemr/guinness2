@@ -1,8 +1,8 @@
-library guinness.test.html_utils_test;
+library guinnessb.test.html_utils_test;
 
 import 'dart:html';
 
-import 'package:guinness/src/html_utils.dart' as utils;
+import 'package:guinnessb/src/html_utils.dart' as utils;
 import 'package:unittest/unittest.dart';
 
 void main() {

@@ -1,25 +1,25 @@
-library guinness.test.suit_info_test;
+library guinnessb.test.suit_info_test;
 
-import 'package:guinness/guinness.dart' as guinness;
+import 'package:guinnessb/guinnessb.dart' as guinnessb;
 import 'package:unittest/unittest.dart';
 
 import '../test_utils.dart';
 
 void main() {
   setUp(() {
-    final context = new guinness.Context();
-    guinness.guinness.resetContext(context);
+    final context = new guinnessb.Context();
+    guinnessb.guinnessb.resetContext(context);
   });
 
   test("describes", () {
-    guinness.describe("outer", () {
-      guinness.xdescribe("xdescribe", noop);
-      guinness.ddescribe("ddescribe", noop);
-      guinness.describe("inner describe", noop);
+    guinnessb.describe("outer", () {
+      guinnessb.xdescribe("xdescribe", noop);
+      guinnessb.ddescribe("ddescribe", noop);
+      guinnessb.describe("inner describe", noop);
     });
-    guinness.describe("pending describe");
+    guinnessb.describe("pending describe");
 
-    final suiteInfo = guinness.guinness.suiteInfo();
+    final suiteInfo = guinnessb.guinnessb.suiteInfo();
     expect(suiteInfo.numberOfDescribes, equals(5));
     expect(suiteInfo.exclusiveDescribes.length, equals(1));
     expect(suiteInfo.excludedDescribes.length, equals(1));
@@ -27,12 +27,12 @@ void main() {
   });
 
   test("its", () {
-    guinness.it("one", noop);
-    guinness.xit("two", noop);
-    guinness.iit("three", noop);
-    guinness.it("pending it");
+    guinnessb.it("one", noop);
+    guinnessb.xit("two", noop);
+    guinnessb.iit("three", noop);
+    guinnessb.it("pending it");
 
-    final suiteInfo = guinness.guinness.suiteInfo();
+    final suiteInfo = guinnessb.guinnessb.suiteInfo();
     expect(suiteInfo.numberOfIts, equals(4));
     expect(suiteInfo.exclusiveIts.length, equals(1));
     expect(suiteInfo.excludedIts.length, equals(1));
@@ -41,68 +41,68 @@ void main() {
 
   group("[activeIts]", () {
     test("ignores its in xdescribe", () {
-      guinness.it("one", noop);
+      guinnessb.it("one", noop);
 
-      guinness.xdescribe("xdescribe", () {
-        guinness.it("two", noop);
+      guinnessb.xdescribe("xdescribe", () {
+        guinnessb.it("two", noop);
       });
 
-      final suiteInfo = guinness.guinness.suiteInfo();
+      final suiteInfo = guinnessb.guinnessb.suiteInfo();
       expect(suiteInfo.activeIts.length, equals(1));
     });
 
     test("ignores pending its", () {
-      guinness.it("one");
+      guinnessb.it("one");
 
-      final suiteInfo = guinness.guinness.suiteInfo();
+      final suiteInfo = guinnessb.guinnessb.suiteInfo();
       expect(suiteInfo.activeIts.length, equals(0));
     });
 
     test("counts only its in ddescribes", () {
-      guinness.it("one", noop);
+      guinnessb.it("one", noop);
 
-      guinness.ddescribe("ddescribe", () {
-        guinness.it("two", noop);
+      guinnessb.ddescribe("ddescribe", () {
+        guinnessb.it("two", noop);
       });
 
-      final suiteInfo = guinness.guinness.suiteInfo();
+      final suiteInfo = guinnessb.guinnessb.suiteInfo();
       expect(suiteInfo.activeIts.length, equals(1));
     });
 
     test("counts only iits", () {
-      guinness.it("one", noop);
+      guinnessb.it("one", noop);
 
-      guinness.describe("describe", () {
-        guinness.iit("two", noop);
+      guinnessb.describe("describe", () {
+        guinnessb.iit("two", noop);
       });
 
-      final suiteInfo = guinness.guinness.suiteInfo();
+      final suiteInfo = guinnessb.guinnessb.suiteInfo();
       expect(suiteInfo.activeIts.length, equals(1));
     });
 
     test("ignores iits in xdescribe", () {
-      guinness.it("one", noop);
+      guinnessb.it("one", noop);
 
-      guinness.xdescribe("xdescribe", () {
-        guinness.iit("two", noop);
-        guinness.iit("three", noop);
+      guinnessb.xdescribe("xdescribe", () {
+        guinnessb.iit("two", noop);
+        guinnessb.iit("three", noop);
       });
 
-      final suiteInfo = guinness.guinness.suiteInfo();
+      final suiteInfo = guinnessb.guinnessb.suiteInfo();
       expect(suiteInfo.activeIts.length, equals(1));
     });
 
     group('[activeItsPercent]', () {
       test("is the percent of active tests in the suite", () {
-        guinness.it("one", noop);
-        guinness.iit("one", noop);
+        guinnessb.it("one", noop);
+        guinnessb.iit("one", noop);
 
-        final suiteInfo = guinness.guinness.suiteInfo();
+        final suiteInfo = guinnessb.guinnessb.suiteInfo();
         expect(suiteInfo.activeItsPercent, equals(50));
       });
 
       test("is zero when not specs", () {
-        final suiteInfo = guinness.guinness.suiteInfo();
+        final suiteInfo = guinnessb.guinnessb.suiteInfo();
         expect(suiteInfo.activeItsPercent, equals(0));
       });
     });

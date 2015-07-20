@@ -1,14 +1,14 @@
 library example;
 
-import 'package:guinness/guinness_html.dart';
+import 'package:guinnessb/guinnessb_html.dart';
 import 'dart:html';
 
 class TestClass {}
 
 main() {
-  guinnessEnableHtmlMatchers();
+  guinnessbEnableHtmlMatchers();
 
-  describe("guinness", () {
+  describe("guinnessb", () {
     it("has various built-in matchers", () {
       expect(2).toEqual(2);
 
@@ -89,7 +89,7 @@ main() {
 
     describe("spy", () {
       it("supports spy functions", () {
-        final s = guinness.createSpy("my spy");
+        final s = guinnessb.createSpy("my spy");
         expect(s).not.toHaveBeenCalled();
 
         s(1);

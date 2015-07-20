@@ -1,22 +1,22 @@
-library guinness.test.integration_test;
+library guinnessb.test.integration_test;
 
 import 'dart:async';
 
-import 'package:guinness/guinness.dart' as guinness;
+import 'package:guinnessb/guinnessb.dart' as guinnessb;
 import 'package:unittest/unittest.dart';
 
-class DummyVisitor implements guinness.SpecVisitor {
+class DummyVisitor implements guinnessb.SpecVisitor {
   List<Future> allFutures = [];
 
-  void visitSuite(guinness.Suite suite) {
+  void visitSuite(guinnessb.Suite suite) {
     suite.children.forEach((c) => c.visit(this));
   }
 
-  void visitDescribe(guinness.Describe describe) {
+  void visitDescribe(guinnessb.Describe describe) {
     describe.children.forEach((c) => c.visit(this));
   }
 
-  void visitIt(guinness.It it) {
+  void visitIt(guinnessb.It it) {
     allFutures.add(it.withSetupAndTeardown());
   }
 
@@ -36,20 +36,20 @@ main() {
   }
 
   setUp(() {
-    context = new guinness.Context();
-    guinness.guinness.resetContext(context);
+    context = new guinnessb.Context();
+    guinnessb.guinnessb.resetContext(context);
   });
 
   test("runs specs once", () {
     var log = [];
 
-    guinness.describe("outer describe", () {
-      guinness.it("outer it", () {
+    guinnessb.describe("outer describe", () {
+      guinnessb.it("outer it", () {
         log.add("outer it");
       });
 
-      guinness.describe("inner describe", () {
-        guinness.it("inner it", () {
+      guinnessb.describe("inner describe", () {
+        guinnessb.it("inner it", () {
           log.add("inner it");
         });
       });
@@ -63,25 +63,25 @@ main() {
   test("runs beforeEach and afterEach blocks", () {
     var log = [];
 
-    guinness.describe("outer describe", () {
-      guinness.beforeEach(() {
+    guinnessb.describe("outer describe", () {
+      guinnessb.beforeEach(() {
         log.add("outer beforeEach");
       });
 
-      guinness.afterEach(() {
+      guinnessb.afterEach(() {
         log.add("outer afterEach");
       });
 
-      guinness.describe("inner describe", () {
-        guinness.beforeEach(() {
+      guinnessb.describe("inner describe", () {
+        guinnessb.beforeEach(() {
           log.add("inner beforeEach");
         });
 
-        guinness.afterEach(() {
+        guinnessb.afterEach(() {
           log.add("inner afterEach");
         });
 
-        guinness.it("inner it", () {
+        guinnessb.it("inner it", () {
           log.add("inner it");
         });
       });
@@ -106,15 +106,15 @@ main() {
         log.add(message);
       });
 
-      guinness.describe("outer describe", () {
-        guinness.beforeEach(() => futurePrinting("outer beforeEach"));
-        guinness.afterEach(() => futurePrinting("outer afterEach"));
+      guinnessb.describe("outer describe", () {
+        guinnessb.beforeEach(() => futurePrinting("outer beforeEach"));
+        guinnessb.afterEach(() => futurePrinting("outer afterEach"));
 
-        guinness.describe("inner describe", () {
-          guinness.beforeEach(() => futurePrinting("inner beforeEach"));
-          guinness.afterEach(() => futurePrinting("inner afterEach"));
+        guinnessb.describe("inner describe", () {
+          guinnessb.beforeEach(() => futurePrinting("inner beforeEach"));
+          guinnessb.afterEach(() => futurePrinting("inner afterEach"));
 
-          guinness.it("inner it", () => futurePrinting("inner it"));
+          guinnessb.it("inner it", () => futurePrinting("inner it"));
         });
       });
 
@@ -131,13 +131,13 @@ main() {
   });
 
   test("pending describes and its", () {
-    guinness.describe("pending describe");
-    guinness.xdescribe("pending excluded describe");
-    guinness.ddescribe("pending exclusive describe");
+    guinnessb.describe("pending describe");
+    guinnessb.xdescribe("pending excluded describe");
+    guinnessb.ddescribe("pending exclusive describe");
 
-    guinness.it("pending it");
-    guinness.xit("pending exlcluded it");
-    guinness.iit("pending exclusive it");
+    guinnessb.it("pending it");
+    guinnessb.xit("pending exlcluded it");
+    guinnessb.iit("pending exclusive it");
     verify(() {});
   });
 }

@@ -1,8 +1,8 @@
 library guiness_init_specs;
 
-import 'package:guinness/guinness.dart';
+import 'package:guinnessb/guinnessb.dart';
 
 main() {
-  guinness.autoInit = false;
-  guinness.initSpecs();
+  guinnessb.autoInit = false;
+  guinnessb.initSpecs();
 }

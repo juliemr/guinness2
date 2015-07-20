@@ -1,4 +1,4 @@
-part of guinness;
+part of guinnessb;
 
 _suiteInfo(Suite suite) {
   final visitor = new _SuiteInfoVisitor();
@@ -27,7 +27,7 @@ class SuiteInfo {
   @deprecated
   void printDetailedStats() {
     print("---- -------------- ----");
-    print("---- Guinness Stats ----");
+    print("---- guinnessb Stats ----");
     print("---- -------------- ----");
 
     print("Total: Describe (${numberOfDescribes}), It (${numberOfIts})");
@@ -46,7 +46,7 @@ class SuiteInfo {
     print("Exclusive It: ${exclusiveIts.map((_) => _.name)}");
 
     print("---- -------------- ----");
-    print("---- Guinness Stats ----");
+    print("---- guinnessb Stats ----");
     print("---- -------------- ----");
   }
 }

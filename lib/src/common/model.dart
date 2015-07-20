@@ -1,4 +1,4 @@
-part of guinness;
+part of guinnessb;
 
 class BeforeEach {
   final Function fn;

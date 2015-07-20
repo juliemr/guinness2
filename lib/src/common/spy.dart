@@ -1,4 +1,4 @@
-part of guinness;
+part of guinnessb;
 
 class SpyFunctionCall {
   final List positionalArguments;

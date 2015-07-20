@@ -1,8 +1,8 @@
-library guinness.test.model_test;
+library guinnessb.test.model_test;
 
 import 'dart:async';
 
-import 'package:guinness/guinness.dart' as guinness;
+import 'package:guinnessb/guinnessb.dart' as guinnessb;
 import 'package:unittest/unittest.dart';
 
 import '../test_utils.dart';
@@ -10,10 +10,10 @@ import '../test_utils.dart';
 void main() {
   group("[It]", () {
     test("returns all before each functions", () {
-      final outerBeforeEach = new guinness.BeforeEach(noop, priority: 0);
+      final outerBeforeEach = new guinnessb.BeforeEach(noop, priority: 0);
       final outer = createDescribe()..addBeforeEach(outerBeforeEach);
 
-      final innerBeforeEach = new guinness.BeforeEach(noop, priority: 0);
+      final innerBeforeEach = new guinnessb.BeforeEach(noop, priority: 0);
       final inner = createDescribe(parent: outer)
         ..addBeforeEach(innerBeforeEach);
 
@@ -23,10 +23,10 @@ void main() {
     });
 
     test("returns all after each functions", () {
-      final outerAfterEach = new guinness.AfterEach(noop, priority: 0);
+      final outerAfterEach = new guinnessb.AfterEach(noop, priority: 0);
       final outer = createDescribe()..addAfterEach(outerAfterEach);
 
-      final innerAfterEach = new guinness.AfterEach(noop, priority: 0);
+      final innerAfterEach = new guinnessb.AfterEach(noop, priority: 0);
       final inner = createDescribe(parent: outer)..addAfterEach(innerAfterEach);
 
       final it = createIt(parent: inner);
@@ -35,8 +35,8 @@ void main() {
     });
 
     test("sorts all beforeEach fns by priority", () {
-      final beforeEach1 = new guinness.BeforeEach(noop, priority: 0);
-      final beforeEach2 = new guinness.BeforeEach(noop, priority: 1);
+      final beforeEach1 = new guinnessb.BeforeEach(noop, priority: 0);
+      final beforeEach2 = new guinnessb.BeforeEach(noop, priority: 1);
 
       final describe = createDescribe()
         ..addBeforeEach(beforeEach1)
@@ -48,8 +48,8 @@ void main() {
     });
 
     test("sorts all afterEach fns by priority", () {
-      final afterEach1 = new guinness.AfterEach(noop, priority: 0);
-      final afterEach2 = new guinness.AfterEach(noop, priority: 1);
+      final afterEach1 = new guinnessb.AfterEach(noop, priority: 0);
+      final afterEach2 = new guinnessb.AfterEach(noop, priority: 1);
 
       final describe = createDescribe()
         ..addAfterEach(afterEach1)
@@ -66,7 +66,7 @@ void main() {
       createBeforeEach(delay, message) {
         var func = () => new Future.delayed(
             new Duration(milliseconds: delay), () => log.add(message));
-        return new guinness.BeforeEach(func, priority: 1);
+        return new guinnessb.BeforeEach(func, priority: 1);
       }
 
       final beforeEach1 = createBeforeEach(2, "one");
@@ -89,7 +89,7 @@ void main() {
       createAfterEach(delay, message) {
         var func = () => new Future.delayed(
             new Duration(milliseconds: delay), () => log.add(message));
-        return new guinness.AfterEach(func, priority: 1);
+        return new guinnessb.AfterEach(func, priority: 1);
       }
 
       final afterEach1 = createAfterEach(2, "one");
@@ -109,8 +109,8 @@ void main() {
     test("does not run any callbacks when pending", () {
       final log = [];
 
-      final be = new guinness.BeforeEach(() => log.add("before"), priority: 0);
-      final ae = new guinness.AfterEach(() => log.add("after"), priority: 0);
+      final be = new guinnessb.BeforeEach(() => log.add("before"), priority: 0);
+      final ae = new guinnessb.AfterEach(() => log.add("after"), priority: 0);
 
       final describe = createDescribe()
         ..addBeforeEach(be)
@@ -134,10 +134,10 @@ void main() {
     group("[error handling]", () {
       test("does not run afterEach callbacks if beforeEach callbacks errored",
           () {
-        final be = new guinness.BeforeEach(() => throw "BOOM", priority: 1);
+        final be = new guinnessb.BeforeEach(() => throw "BOOM", priority: 1);
 
         var run = false;
-        final ae = new guinness.AfterEach(() => run = true, priority: 1);
+        final ae = new guinnessb.AfterEach(() => run = true, priority: 1);
 
         final describe = createDescribe()
           ..addBeforeEach(be)
@@ -151,10 +151,10 @@ void main() {
       });
 
       test("returns the original error when both it and afterEach throw", () {
-        final ae = new guinness.AfterEach(() => throw "after", priority: 1);
+        final ae = new guinnessb.AfterEach(() => throw "after", priority: 1);
         final describe = createDescribe()..addAfterEach(ae);
 
-        final it = new guinness.It("it", describe, () => throw "it");
+        final it = new guinnessb.It("it", describe, () => throw "it");
 
         it.withSetupAndTeardown().catchError(expectAsync((err) {
           expect(err, equals("it"));
@@ -163,10 +163,10 @@ void main() {
 
       test("return the error thrown by `afterEach` if `it` returns normally",
           () {
-        final ae = new guinness.AfterEach(() => throw "after", priority: 1);
+        final ae = new guinnessb.AfterEach(() => throw "after", priority: 1);
         final describe = createDescribe()..addAfterEach(ae);
 
-        final it = new guinness.It("it", describe, noop);
+        final it = new guinnessb.It("it", describe, noop);
 
         it.withSetupAndTeardown().catchError(expectAsync((err) {
           expect(err, equals("after"));

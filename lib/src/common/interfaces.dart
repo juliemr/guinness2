@@ -1,4 +1,4 @@
-part of guinness;
+part of guinnessb;
 
 typedef void SpecRunner(Suite suite);
 
