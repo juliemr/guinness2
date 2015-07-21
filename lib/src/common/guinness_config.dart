@@ -5,7 +5,6 @@ class Guinnessb {
   dynamic matchers;
   SpecRunner _initSpecs;
   bool autoInit = true;
-  bool showStats = false;
 
   Guinnessb({this.matchers, SpecRunner initSpecs})
       : _initSpecs = initSpecs {
@@ -19,7 +18,6 @@ class Guinnessb {
   }
 
   void initSpecs() {
-    if (showStats) suiteInfo().printDetailedStats();
     _initSpecs(_context.suite);
   }
 

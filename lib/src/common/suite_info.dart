@@ -23,32 +23,6 @@ class SuiteInfo {
   bool get hasActiveIts => activeIts.isNotEmpty;
   int get activeItsPercent =>
       numberOfIts > 0 ? (activeIts.length / numberOfIts * 100).toInt() : 0;
-
-  @deprecated
-  void printDetailedStats() {
-    print("---- -------------- ----");
-    print("---- guinnessb Stats ----");
-    print("---- -------------- ----");
-
-    print("Total: Describe (${numberOfDescribes}), It (${numberOfIts})");
-    print(
-        "Excluded: Describe (${excludedDescribes.length}), It (${excludedIts.length})");
-    print(
-        "Exclusive: Describe (${exclusiveDescribes.length}), It (${exclusiveIts.length})");
-
-    if (exclusiveIts.isNotEmpty && exclusiveDescribes.isNotEmpty) {
-      print(
-          "WARNING: Exclusive It blocks have higher priority than exlusive Describe blocks");
-    }
-
-    print("---- Details ----");
-    print("Exclusive Describe: ${exclusiveDescribes.map((_) => _.name)}");
-    print("Exclusive It: ${exclusiveIts.map((_) => _.name)}");
-
-    print("---- -------------- ----");
-    print("---- guinnessb Stats ----");
-    print("---- -------------- ----");
-  }
 }
 
 class _SuiteInfoVisitor implements SpecVisitor {
