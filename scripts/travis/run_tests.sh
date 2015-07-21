@@ -14,9 +14,8 @@ curl http://storage.googleapis.com/dart-archive/channels/stable/raw/latest/darti
 unzip $DARTIUM_DIST > /dev/null
 rm $DARTIUM_DIST
 mv dartium-* dartium;
+ln dartium/chrome dartium/dartium
 
-export DART_SDK="$PWD/dart-sdk"
-export PATH="$DART_SDK/bin:$PATH"
 export DARTIUM_BIN="$PWD/dartium"
 export PATH="$DARTIUM_BIN:$PATH"
 
