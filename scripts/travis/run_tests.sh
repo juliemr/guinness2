@@ -17,8 +17,8 @@ mv dartium-* dartium;
 
 export DART_SDK="$PWD/dart-sdk"
 export PATH="$DART_SDK/bin:$PATH"
-export DARTIUM_BIN="$PWD/dartium/chrome"
-export PATH:"$PWD/dartium:$PATH"
+export DARTIUM_BIN="$PWD/dartium"
+export PATH:"$DARTIUM_BIN:$PATH"
 
 echo -------------------
 echo Dart analyzer
