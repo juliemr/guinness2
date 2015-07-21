@@ -1,9 +1,0 @@
-name: example
-author: Julie Ralph <ju.ralph@gmail.com>
-homepage: https://github.com/juliemr/guinnessb
-dependencies:
-  guinnessb:
-    path: ../
-  browser: any
-environment:
-  sdk: ">=1.9.0 <2.0.0"
