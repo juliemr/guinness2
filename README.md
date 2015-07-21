@@ -2,7 +2,7 @@
 
 dart_test_bdd is a port of the Jasmine library to Dart. It is based on the AngularDart implementation of Jasmine, and similar to Guinness but for dart:test instead of dart:unittest.
 
-NOTE: The following documentation is for Guinness and may not be completely accurate.
+NOTE: The following documentation is for Guinness and may not be completely accurate..
 
 ## Installation
 
