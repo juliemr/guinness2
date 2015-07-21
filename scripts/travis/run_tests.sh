@@ -18,12 +18,14 @@ mv dartium-* dartium;
 export DART_SDK="$PWD/dart-sdk"
 export PATH="$DART_SDK/bin:$PATH"
 export DARTIUM_BIN="$PWD/dartium/chrome"
+export PATH:"$PWD/dartium:$PATH"
 
 echo -------------------
 echo Dart analyzer
 echo -------------------
 which dart
 which dartanalyzer
+which dartium
 dartanalyzer lib/guinnessb_html.dart
 
 if [ $? -ne 0 ]; then
