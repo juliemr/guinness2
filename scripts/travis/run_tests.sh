@@ -24,7 +24,7 @@ echo Dart analyzer
 echo -------------------
 which dart
 which dartanalyzer
-dartanalyzer lib/guinnessb_html.dart | grep "No issues found"
+dartanalyzer lib/guinnessb_html.dart
 
 if [ $? -ne 0 ]; then
   echo Dart analyzer failed
