@@ -1,6 +1,6 @@
 name: example
-author: Victor Savkin <vic.savkin@gmail.com>
-homepage: https://github.com/vsavkin/guinnessb
+author: Julie Ralph <ju.ralph@gmail.com>
+homepage: https://github.com/juliemr/guinnessb
 dependencies:
   guinnessb:
     path: ../
