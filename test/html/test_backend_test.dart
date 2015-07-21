@@ -54,13 +54,13 @@ void main() {
       verify(dartTest.group(any, any));
     });
 
-    // test('uses solo_group for exclusive describe', () {
-    //   final suite = createSuite()..add(createDescribe(exclusive: true));
+    test('only adds exclusive describe', () {
+      final suite = createSuite()..add(createDescribe(exclusive: true))
+          ..add(createDescribe());
 
-    //   dartTest.shouldReceive("solo_group");
-
-    //   visitor.visitSuite(suite);
-    // });
+      visitor.visitSuite(suite);
+      verify(dartTest.group(any, any)).called(1);
+    });
 
     test('skips excluded describes', () {
       final suite = createSuite()..add(createDescribe(excluded: true));
@@ -75,13 +75,13 @@ void main() {
       verify(dartTest.test(any, any));
     });
 
-    // test('uses solo_test for exclusive it', () {
-    //   final suite = createSuite()..add(createIt(exclusive: true));
+    test('only adds exclusive it', () {
+      final suite = createSuite()..add(createIt(exclusive: true))
+          ..add(createIt());
 
-    //   dartTest.shouldReceive("solo_test");
-
-    //   visitor.visitSuite(suite);
-    // });
+      visitor.visitSuite(suite);
+      verify(dartTest.test(any, any)).called(1);
+    });
 
     test('skips excluded its', () {
       final suite = createSuite()..add(createIt(excluded: true));

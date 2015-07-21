@@ -3,13 +3,12 @@ part of guinnessb;
 class TestAdapter {
   const TestAdapter();
   void group(String name, Function fn) => dartTest.group(name, fn);
-  // void solo_group(String name, Function fn) => dartTest.solo_group(name, fn);
   void test(String name, Function fn) => dartTest.test(name, fn);
-  // void solo_test(String name, Function fn) => dartTest.solo_test(name, fn);
 }
 
 class TestVisitor implements SpecVisitor {
   bool containsExclusiveIt = false;
+  bool containsExclusiveDescribe = false;
   Set initializedSpecs;
   dynamic dartTest;
 
@@ -18,8 +17,10 @@ class TestVisitor implements SpecVisitor {
   void visitSuite(Suite suite) {
     final v = new ExclusiveVisitor();
     v.visitSuite(suite);
+    // v now has containsExclusiveIt and containsExclusiveDescibe properties for the whole suite
 
     containsExclusiveIt = v.containsExclusiveIt;
+    containsExclusiveDescribe = v.containsExclusiveDescribe;
     _visitChildren(suite.children);
   }
 
@@ -27,16 +28,17 @@ class TestVisitor implements SpecVisitor {
     _once(describe, () {
       if (describe.excluded) return;
 
-      if (describe.exclusive && !containsExclusiveIt) {
-        print('Sorry, no exclusive groups');
-        // dartTest.solo_group(describe.name, () {
-        //   _visitChildren(describe.children);
-        // });
-      } else {
-        dartTest.group(describe.name, () {
-          _visitChildren(describe.children);
-        });
+      // If there is an exclusive it somewhere, we need to visit all
+      // describes (whether they are exclusive or not) to find it. Otherwise,
+      // if there exists an exclusive describe, ignore all non-exclusive
+      // describes.
+      if (!containsExclusiveIt && (containsExclusiveDescribe && !describe.exclusive)) {
+        return;
       }
+
+      dartTest.group(describe.name, () {
+        _visitChildren(describe.children);
+      });
     });
   }
 
@@ -44,12 +46,9 @@ class TestVisitor implements SpecVisitor {
     _once(it, () {
       if (it.excluded) return;
 
-      if (it.exclusive) {
-        print('Sorry, no exclusive tests');
-        // dartTest.solo_test(it.name, it.withSetupAndTeardown);
-      } else {
-        dartTest.test(it.name, it.withSetupAndTeardown);
-      }
+      if (containsExclusiveIt && !it.exclusive) return;
+
+      dartTest.test(it.name, it.withSetupAndTeardown);
     });
   }
 
