@@ -1,3 +1,6 @@
+@TestOn("browser")
+
+
 library guinnessb_test;
 
 import 'package:guinnessb/guinnessb_html.dart' as guinnessb;

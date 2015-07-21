@@ -3,14 +3,12 @@ part of guinnessb;
 class Guinnessb {
   Context _context = new Context();
   dynamic matchers;
-  SpecRunner _runner;
   SpecRunner _initSpecs;
   bool autoInit = true;
   bool showStats = false;
 
-  Guinnessb({this.matchers, SpecRunner runner, SpecRunner initSpecs})
-      : _runner = runner,
-        _initSpecs = initSpecs {
+  Guinnessb({this.matchers, SpecRunner initSpecs})
+      : _initSpecs = initSpecs {
     _scheduleAutoInit();
   }
 
@@ -18,10 +16,6 @@ class Guinnessb {
 
   SpyFunction spyOn(obj, String name) {
     throw "Not implemented";
-  }
-
-  void runSpecs() {
-    _runner(_context.suite);
   }
 
   void initSpecs() {

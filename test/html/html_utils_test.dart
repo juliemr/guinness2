@@ -1,3 +1,5 @@
+@TestOn("browser")
+
 library guinnessb.test.html_utils_test;
 
 import 'dart:html';

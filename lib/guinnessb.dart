@@ -24,5 +24,4 @@ const _u = const _Undefined();
 
 final Guinnessb guinnessb = new Guinnessb(
     matchers: new UnitTestMatchers(),
-    runner: unitTestRunner,
     initSpecs: unitTestInitSpecs);

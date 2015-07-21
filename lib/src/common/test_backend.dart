@@ -3,9 +3,9 @@ part of guinnessb;
 class UnitTestAdapter {
   const UnitTestAdapter();
   void group(String name, Function fn) => unit.group(name, fn);
-  void solo_group(String name, Function fn) => unit.solo_group(name, fn);
+  // void solo_group(String name, Function fn) => unit.solo_group(name, fn);
   void test(String name, Function fn) => unit.test(name, fn);
-  void solo_test(String name, Function fn) => unit.solo_test(name, fn);
+  // void solo_test(String name, Function fn) => unit.solo_test(name, fn);
 }
 
 class UnitTestVisitor implements SpecVisitor {
@@ -28,9 +28,10 @@ class UnitTestVisitor implements SpecVisitor {
       if (describe.excluded) return;
 
       if (describe.exclusive && !containsExclusiveIt) {
-        unit.solo_group(describe.name, () {
-          _visitChildren(describe.children);
-        });
+        print('Sorry, no exclusive groups');
+        // unit.solo_group(describe.name, () {
+        //   _visitChildren(describe.children);
+        // });
       } else {
         unit.group(describe.name, () {
           _visitChildren(describe.children);
@@ -44,7 +45,8 @@ class UnitTestVisitor implements SpecVisitor {
       if (it.excluded) return;
 
       if (it.exclusive) {
-        unit.solo_test(it.name, it.withSetupAndTeardown);
+        print('Sorry, no exclusive tests');
+        // unit.solo_test(it.name, it.withSetupAndTeardown);
       } else {
         unit.test(it.name, it.withSetupAndTeardown);
       }
@@ -340,11 +342,6 @@ Set _initializedSpecs = new Set();
 void unitTestInitSpecs(Suite suite) {
   var r = new UnitTestVisitor(_initializedSpecs);
   suite.visit(r);
-}
-
-void unitTestRunner(Suite suite) {
-  unitTestInitSpecs(suite);
-  unit.runTests();
 }
 
 bool get _isDart2js => identical(1, 1.0);

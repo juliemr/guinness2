@@ -1,8 +1,10 @@
+@TestOn("browser")
+
 library guinnessb.test.unittest_backend_test;
 
 import 'dart:html' as html;
 
-import 'package:dartmocks/dartmocks.dart';
+import 'package:mockito/mockito.dart';
 import 'package:guinnessb/guinnessb_html.dart' as guinnessb;
 import 'package:test/test.dart';
 
