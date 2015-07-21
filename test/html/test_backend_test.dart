@@ -89,16 +89,17 @@ void main() {
       visitor.visitSuite(suite);
     });
 
-    // test('runs only exlusive its', () {
-    //   final suite = createSuite()
-    //     ..add(createIt(exclusive: true))
-    //     ..add(createDescribe(exclusive: true));
+    test('runs only exlusive its', () {
+      final suite = createSuite();
+      var exclusiveDescribe = createDescribe(exclusive: true);
+      var exclusiveIt = createIt(exclusive: true);
+      var otherIt = createIt(parent: exclusiveDescribe);
+      suite..add(exclusiveDescribe)..add(exclusiveIt);
 
-    //   dartTest.shouldReceive("group");
-    //   dartTest.shouldReceive("solo_test");
-
-    //   visitor.visitSuite(suite);
-    // });
+      visitor.visitSuite(suite);
+      verify(dartTest.group(any, any));
+      verify(dartTest.test(any, any));
+    });
 
     test("initializes specs only once", () {
       final suite = createSuite()
