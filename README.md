@@ -1,31 +1,36 @@
-# Guinness
+# Guinness2 [![Build Status](https://travis-ci.org/juliemr/guinness_2.svg?branch=master)](https://travis-ci.org/juliemr/guinness_2)
 
-dart_test_bdd is a port of the Jasmine library to Dart. It is based on the AngularDart implementation of Jasmine, and similar to Guinness but for dart:test instead of dart:unittest.
+Guinness2 is a port of the Jasmine library to Dart. It is based on the AngularDart implementation of Jasmine, and similar to [Guinness](https://github.com/vsavkin/guinness) but for dart:test instead of dart:unittest.
 
-NOTE: The following documentation is for Guinness and may not be completely accurate..
+## Difference from Guinness
+
+Backed by `dart:test` instead of `dart:unittest`. Run via `pub run test` instead of a Karma setup.
+
+Removed bits referring to 'runner' programatically - just use `pub run test`. Removed deprecated
+showStats option.
 
 ## Installation
 
-You can find the Guinness installation instructions [here](http://pub.dartlang.org/packages/guinness#installing).
+You can find the Guinness installation instructions [here](http://pub.dartlang.org/packages/guinness_2#installing).
 
 ## Importing the Library
 
 ```dart
-import 'package:guinness/guinness.dart';
+import 'package:guinness_2/guinness.dart';
 
 main() {
-  //you specs
+  // your specs
 }
 ```
 
 If you are testing a client-side application, and you want to use html matchers, import the `guinness_html` library.
 
 ```dart
-import 'package:guinness/guinness_html.dart';
+import 'package:guinness_2/guinness_html.dart';
 
 main() {
   guinnessEnableHtmlMatchers();
-  //you specs
+  // your specs
 }
 ```
 
@@ -34,7 +39,7 @@ main() {
 Guinness specs are comprised of `describe`, `it`, `beforeEach`, and `afterEach` blocks.
 
 ```dart
-import 'package:guinness/guinness.dart';
+import 'package:guinness_2/guinness.dart';
 
 main(){
   describe("syntax", () {
@@ -193,47 +198,18 @@ expect(select).toEqualSelect(["1", ["2"], "3"]);
 You can also use unittest matchers, like this:
 
 ```dart
-expect(myObject).to(beValid); //where beValid is a unittest matcher
+expect(myObject).to(beValid); // where beValid is a unittest matcher
 ```
 
-## Migrating from Unittest
+## Migrating from Unittest/Test
 
 To make migration from the unittest library to Guinness easier, `expect` supports an optional second argument.
 
 ```dart
-expect(myObject, beValid); //same as expect(myObject).to(beValid);
+expect(myObject, beValid); // same as expect(myObject).to(beValid);
 ```
 
 This keeps your unittest assertions working, so you can change them one by one.
-
-While transitioning you can have both the unittest and guinness libraries imported:
-
-```dart
-import 'package:unittest/unittest.dart' hide expect;
-import 'package:guinness/guinness.dart';
-```
-
-## Extending Guinness
-
-If you are using a lot of custom matchers, and using `expect(object).to(matcher)` is tedious,
-you can extend the library, as follows:
-
-```dart
-library test_helper;
-
-import 'guinness.dart' as gns;
-export 'guinness.dart';
-
-final _m = gns.guinness.matchers;
-
-class CustomExpect extends gns.Expect {
-  CustomExpect(actual) : super(actual);
-
-  toBePositive() => _m.expect(actual > 0, true, reason: 'is not positive');
-}
-
-CustomExpect expect(actual) => new CustomExpect(actual);
-```
 
 ## Spy
 
@@ -288,26 +264,6 @@ expect(s.invoke(1,2)).toEqual(3);
 
 You can also use the `mock` and `dart_mocks` libraries with it.
 
-
-## Guinness and Unittest
-
-Guinness supports pluggable backends, but by default runs on top of the unittest library. Which means that if
-unittest.autoStart is set to true, your specs will run automatically.
-
-You can always initialize specs manually:
-
-```dart
-guinness.initSpecs();
-```
-
-You can also run the specs, like this:
-
-```dart
-guinness.runSpecs();
-```
-
-Usually, you don't need to worry about it.
-
 ## Status
 
 There are a few things that are still not supported (e.g., handling named parameters in expectations).
@@ -333,4 +289,4 @@ as a  separate step, executes them. It enables all sorts of preprocessing (e.g.,
 #### Pluggable backends.
 
 Since the library is a DSL, there can be multiple backend libraries actually executing the specs. By default,
-the  library comes with the unittest backend.
+the  library comes with the test backend.
