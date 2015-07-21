@@ -1,3 +1,5 @@
+@TestOn('browser')
+
 library example;
 
 import 'package:guinnessb/guinnessb_html.dart';
