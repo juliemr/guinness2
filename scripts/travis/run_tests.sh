@@ -22,6 +22,8 @@ export DARTIUM_BIN="$PWD/dartium/chrome"
 echo -------------------
 echo Dart analyzer
 echo -------------------
+which dart
+which dartanalyzer
 dartanalyzer lib/guinnessb_html.dart | grep "No issues found"
 
 if [ $? -ne 0 ]; then
