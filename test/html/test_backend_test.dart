@@ -1,6 +1,6 @@
 @TestOn("browser")
 
-library guinnessb.test.unittest_backend_test;
+library guinnessb.test.test_backend_test;
 
 import 'dart:html' as html;
 
@@ -26,21 +26,21 @@ class TestClassWithPrivateField {
   TestClassWithPrivateField([this.prop, this._private]);
 }
 
-class MockUnitTest extends Mock {
+class MockTest extends Mock {
   noSuchMethod(i) => super.noSuchMethod(i);
 }
 
 void main() {
-  group("[UnitTestVisitor]", () {
-    var visitor, unit;
+  group("[TestVisitor]", () {
+    var visitor, dartTest;
 
     setUp(() {
-      unit = new MockUnitTest();
-      visitor = new guinnessb.UnitTestVisitor(new Set(), unit: unit);
+      dartTest = new MockTest();
+      visitor = new guinnessb.TestVisitor(new Set(), dartTest: dartTest);
     });
 
     tearDown(() {
-      verifyNoMoreInteractions(unit);
+      verifyNoMoreInteractions(dartTest);
     });
 
     test('handles an empty suite', () {
@@ -51,13 +51,13 @@ void main() {
       final suite = createSuite()..add(createDescribe());
 
       visitor.visitSuite(suite);
-      verify(unit.group(any, any));
+      verify(dartTest.group(any, any));
     });
 
     // test('uses solo_group for exclusive describe', () {
     //   final suite = createSuite()..add(createDescribe(exclusive: true));
 
-    //   unit.shouldReceive("solo_group");
+    //   dartTest.shouldReceive("solo_group");
 
     //   visitor.visitSuite(suite);
     // });
@@ -72,13 +72,13 @@ void main() {
       final suite = createSuite()..add(createIt());
 
       visitor.visitSuite(suite);
-      verify(unit.test(any, any));
+      verify(dartTest.test(any, any));
     });
 
     // test('uses solo_test for exclusive it', () {
     //   final suite = createSuite()..add(createIt(exclusive: true));
 
-    //   unit.shouldReceive("solo_test");
+    //   dartTest.shouldReceive("solo_test");
 
     //   visitor.visitSuite(suite);
     // });
@@ -94,8 +94,8 @@ void main() {
     //     ..add(createIt(exclusive: true))
     //     ..add(createDescribe(exclusive: true));
 
-    //   unit.shouldReceive("group");
-    //   unit.shouldReceive("solo_test");
+    //   dartTest.shouldReceive("group");
+    //   dartTest.shouldReceive("solo_test");
 
     //   visitor.visitSuite(suite);
     // });
@@ -108,13 +108,13 @@ void main() {
       visitor.visitSuite(suite);
 
       visitor.visitSuite(suite);
-      verify(unit.test(any, any));
-      verify(unit.group(any, any));
+      verify(dartTest.test(any, any));
+      verify(dartTest.group(any, any));
     });
   });
 
-  group("[UnitTestMatchers]", () {
-    final matchers = new guinnessb.UnitTestMatchersWithHtml();
+  group("[TestMatchers]", () {
+    final matchers = new guinnessb.TestMatchersWithHtml();
 
     test("toBe", () {
       var x = [1, 2];

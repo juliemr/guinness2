@@ -1,19 +1,19 @@
 part of guinnessb;
 
-class UnitTestAdapter {
-  const UnitTestAdapter();
-  void group(String name, Function fn) => unit.group(name, fn);
-  // void solo_group(String name, Function fn) => unit.solo_group(name, fn);
-  void test(String name, Function fn) => unit.test(name, fn);
-  // void solo_test(String name, Function fn) => unit.solo_test(name, fn);
+class TestAdapter {
+  const TestAdapter();
+  void group(String name, Function fn) => dartTest.group(name, fn);
+  // void solo_group(String name, Function fn) => dartTest.solo_group(name, fn);
+  void test(String name, Function fn) => dartTest.test(name, fn);
+  // void solo_test(String name, Function fn) => dartTest.solo_test(name, fn);
 }
 
-class UnitTestVisitor implements SpecVisitor {
+class TestVisitor implements SpecVisitor {
   bool containsExclusiveIt = false;
   Set initializedSpecs;
-  dynamic unit;
+  dynamic dartTest;
 
-  UnitTestVisitor(this.initializedSpecs, {this.unit: const UnitTestAdapter()});
+  TestVisitor(this.initializedSpecs, {this.dartTest: const TestAdapter()});
 
   void visitSuite(Suite suite) {
     final v = new ExclusiveVisitor();
@@ -29,11 +29,11 @@ class UnitTestVisitor implements SpecVisitor {
 
       if (describe.exclusive && !containsExclusiveIt) {
         print('Sorry, no exclusive groups');
-        // unit.solo_group(describe.name, () {
+        // dartTest.solo_group(describe.name, () {
         //   _visitChildren(describe.children);
         // });
       } else {
-        unit.group(describe.name, () {
+        dartTest.group(describe.name, () {
           _visitChildren(describe.children);
         });
       }
@@ -46,9 +46,9 @@ class UnitTestVisitor implements SpecVisitor {
 
       if (it.exclusive) {
         print('Sorry, no exclusive tests');
-        // unit.solo_test(it.name, it.withSetupAndTeardown);
+        // dartTest.solo_test(it.name, it.withSetupAndTeardown);
       } else {
-        unit.test(it.name, it.withSetupAndTeardown);
+        dartTest.test(it.name, it.withSetupAndTeardown);
       }
     });
   }
@@ -64,128 +64,128 @@ class UnitTestVisitor implements SpecVisitor {
   }
 }
 
-class UnitTestMatchers implements Matchers {
+class TestMatchers implements Matchers {
   get config => {};
 
   void expect(actual, matcher, {String reason}) =>
-      unit.expect(actual, matcher, reason: reason);
+      dartTest.expect(actual, matcher, reason: reason);
 
-  void toEqual(actual, expected) => unit.expect(actual, unit.equals(expected));
+  void toEqual(actual, expected) => dartTest.expect(actual, dartTest.equals(expected));
 
   void toContain(actual, expected) =>
-      unit.expect(actual, unit.contains(expected));
+      dartTest.expect(actual, dartTest.contains(expected));
 
-  void toBe(actual, expected) => unit.expect(actual,
-      unit.predicate((actual) => identical(expected, actual), '$expected'));
+  void toBe(actual, expected) => dartTest.expect(actual,
+      dartTest.predicate((actual) => identical(expected, actual), '$expected'));
 
   void toBeLessThan(num actual, num expected) =>
-      unit.expect(actual, unit.lessThan(expected));
+      dartTest.expect(actual, dartTest.lessThan(expected));
 
   void toBeGreaterThan(num actual, num expected) =>
-      unit.expect(actual, unit.greaterThan(expected));
+      dartTest.expect(actual, dartTest.greaterThan(expected));
 
   void toBeCloseTo(num actual, num expected, num precision) =>
-      unit.expect(actual, unit.closeTo(expected, math.pow(10, -precision) / 2));
+      dartTest.expect(actual, dartTest.closeTo(expected, math.pow(10, -precision) / 2));
 
   void toBeA(actual, expected) =>
-      unit.expect(actual, new IsSubtypeOf(expected));
+      dartTest.expect(actual, new IsSubtypeOf(expected));
 
   void toBeAnInstanceOf(actual, expected) =>
-      unit.expect(actual, new IsInstanceOf(expected));
+      dartTest.expect(actual, new IsInstanceOf(expected));
 
-  void toThrow(actual, [Pattern pattern]) => unit.expect(actual, pattern == null
-      ? unit.throws
-      : unit.throwsA(new ExceptionMatcher(message: pattern)));
+  void toThrow(actual, [Pattern pattern]) => dartTest.expect(actual, pattern == null
+      ? dartTest.throws
+      : dartTest.throwsA(new ExceptionMatcher(message: pattern)));
 
   void toThrowWith(actual,
       {Type anInstanceOf, Type type, Pattern message, Function where}) {
     final matcher = new ExceptionMatcher(
         anInstanceOf: anInstanceOf, type: type, message: message, where: where);
-    unit.expect(actual, unit.throwsA(matcher));
+    dartTest.expect(actual, dartTest.throwsA(matcher));
   }
 
   void toBeFalsy(actual) =>
-      unit.expect(actual, _isFalsy, reason: '"$actual" is not Falsy');
+      dartTest.expect(actual, _isFalsy, reason: '"$actual" is not Falsy');
 
-  void toBeTruthy(actual) => unit.expect(actual, (v) => !_isFalsy(v),
+  void toBeTruthy(actual) => dartTest.expect(actual, (v) => !_isFalsy(v),
       reason: '"$actual" is not Truthy');
 
-  void toBeFalse(actual) => unit.expect(actual, unit.isFalse);
+  void toBeFalse(actual) => dartTest.expect(actual, dartTest.isFalse);
 
-  void toBeTrue(actual) => unit.expect(actual, unit.isTrue);
+  void toBeTrue(actual) => dartTest.expect(actual, dartTest.isTrue);
 
-  void toBeDefined(actual) => unit.expect(actual, unit.isNotNull);
+  void toBeDefined(actual) => dartTest.expect(actual, dartTest.isNotNull);
 
-  void toBeNull(actual) => unit.expect(actual, unit.isNull);
+  void toBeNull(actual) => dartTest.expect(actual, dartTest.isNull);
 
-  void toBeNotNull(actual) => unit.expect(actual, unit.isNotNull);
+  void toBeNotNull(actual) => dartTest.expect(actual, dartTest.isNotNull);
 
   void toHaveBeenCalled(actual) =>
-      unit.expect(actual.called, true, reason: 'method not called');
+      dartTest.expect(actual.called, true, reason: 'method not called');
 
-  void toHaveBeenCalledOnce(actual) => unit.expect(actual.count, 1,
+  void toHaveBeenCalledOnce(actual) => dartTest.expect(actual.count, 1,
       reason: 'method invoked ${actual.count} expected once');
 
   void toHaveBeenCalledWith(actual,
-      [a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) => unit.expect(
+      [a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) => dartTest.expect(
           actual.firstArgsMatch(a, b, c, d, e, f), true,
           reason: 'method invoked with correct arguments');
 
   void toHaveBeenCalledOnceWith(actual,
-      [a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) => unit.expect(
+      [a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) => dartTest.expect(
           actual.count == 1 && actual.firstArgsMatch(a, b, c, d, e, f), true,
           reason: 'method invoked once with correct arguments.'
           '(Called ${actual.count} times)');
 
   void toHaveSameProps(actual, expected) =>
-      unit.expect(actual, new SamePropsMatcher(expected));
+      dartTest.expect(actual, new SamePropsMatcher(expected));
 
   void notToEqual(actual, expected) =>
-      unit.expect(actual, unit.isNot(unit.equals(expected)));
+      dartTest.expect(actual, dartTest.isNot(dartTest.equals(expected)));
 
   void notToContain(actual, expected) =>
-      unit.expect(actual, unit.isNot(unit.contains(expected)));
+      dartTest.expect(actual, dartTest.isNot(dartTest.contains(expected)));
 
-  void notToBe(actual, expected) => unit.expect(actual, unit.predicate(
+  void notToBe(actual, expected) => dartTest.expect(actual, dartTest.predicate(
       (actual) => !identical(expected, actual), 'not $expected'));
 
   void notToBeLessThan(num actual, num expected) =>
-      unit.expect(actual, unit.isNot(unit.lessThan(expected)));
+      dartTest.expect(actual, dartTest.isNot(dartTest.lessThan(expected)));
 
   void notToBeGreaterThan(num actual, num expected) =>
-      unit.expect(actual, unit.isNot(unit.greaterThan(expected)));
+      dartTest.expect(actual, dartTest.isNot(dartTest.greaterThan(expected)));
 
   void notToBeCloseTo(num actual, num expected, num precision) =>
-      unit.expect(actual,
-          unit.isNot(unit.closeTo(expected, math.pow(10, -precision) / 2)));
+      dartTest.expect(actual,
+          dartTest.isNot(dartTest.closeTo(expected, math.pow(10, -precision) / 2)));
 
   void notToBeA(actual, expected) =>
-      unit.expect(actual, unit.isNot(new IsSubtypeOf(expected)));
+      dartTest.expect(actual, dartTest.isNot(new IsSubtypeOf(expected)));
 
   void notToBeAnInstanceOf(actual, expected) =>
-      unit.expect(actual, unit.isNot(new IsInstanceOf(expected)));
+      dartTest.expect(actual, dartTest.isNot(new IsInstanceOf(expected)));
 
-  void toReturnNormally(actual) => unit.expect(actual, unit.returnsNormally);
+  void toReturnNormally(actual) => dartTest.expect(actual, dartTest.returnsNormally);
 
-  void toBeUndefined(actual) => unit.expect(actual, unit.isNull);
+  void toBeUndefined(actual) => dartTest.expect(actual, dartTest.isNull);
 
   void notToHaveBeenCalled(actual) =>
-      unit.expect(actual.called, false, reason: 'method called');
+      dartTest.expect(actual.called, false, reason: 'method called');
 
   void notToHaveBeenCalledWith(actual,
-      [a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) => unit.expect(
+      [a = _u, b = _u, c = _u, d = _u, e = _u, f = _u]) => dartTest.expect(
           actual.firstArgsMatch(a, b, c, d, e, f), false,
           reason: 'method invoked with correct arguments');
 
   void notToHaveSameProps(actual, expected) =>
-      unit.expect(actual, unit.isNot(new SamePropsMatcher(expected)));
+      dartTest.expect(actual, dartTest.isNot(new SamePropsMatcher(expected)));
 }
 
 bool _isFalsy(v) => v == null ? true : v is bool ? v == false : false;
 
 /// Matches an exception against its type, class, and message
-class ExceptionMatcher extends unit.Matcher {
-  final List<unit.Matcher> _matchers = [];
+class ExceptionMatcher extends dartTest.Matcher {
+  final List<dartTest.Matcher> _matchers = [];
 
   ExceptionMatcher(
       {Type anInstanceOf, Type type, Pattern message, Function where}) {
@@ -198,7 +198,7 @@ class ExceptionMatcher extends unit.Matcher {
   bool matches(item, Map matchState) =>
       _matchers.every((matcher) => matcher.matches(item, matchState));
 
-  unit.Description describe(unit.Description description) {
+  dartTest.Description describe(dartTest.Description description) {
     if (_matchers.isEmpty) return description;
 
     description.add('an exception, which ');
@@ -214,7 +214,7 @@ class ExceptionMatcher extends unit.Matcher {
 }
 
 /// Matches when the object is verified by [_where]
-class WhereMatcher extends unit.Matcher {
+class WhereMatcher extends dartTest.Matcher {
   final Function _where;
 
   const WhereMatcher(this._where);
@@ -222,17 +222,17 @@ class WhereMatcher extends unit.Matcher {
   bool matches(obj, Map matchState) {
     try {
       return _where(obj) != false;
-    } on unit.TestFailure catch (e) {
+    } on dartTest.TestFailure catch (e) {
       matchState["nestedMatcherFailure"] = e;
       return false;
     }
   }
 
-  unit.Description describe(unit.Description description) =>
+  dartTest.Description describe(dartTest.Description description) =>
       description.add("is verified by `where`");
 }
 
-class PatternMatcher extends unit.Matcher {
+class PatternMatcher extends dartTest.Matcher {
   final Pattern _pattern;
 
   const PatternMatcher(this._pattern);
@@ -240,12 +240,12 @@ class PatternMatcher extends unit.Matcher {
   bool matches(obj, Map matchState) =>
       _pattern.allMatches(obj.toString()).isNotEmpty;
 
-  unit.Description describe(unit.Description description) =>
+  dartTest.Description describe(dartTest.Description description) =>
       description.add('matches $_pattern');
 }
 
 /// Matches when the object is a subtype of [_type]
-class IsSubtypeOf extends unit.Matcher {
+class IsSubtypeOf extends dartTest.Matcher {
   final Type _type;
 
   const IsSubtypeOf(this._type);
@@ -263,12 +263,12 @@ class IsSubtypeOf extends unit.Matcher {
     }
   }
 
-  unit.Description describe(unit.Description description) =>
+  dartTest.Description describe(dartTest.Description description) =>
       description.add('a subtype of $_type');
 }
 
 /// Matches when objects have the same properties
-class SamePropsMatcher extends unit.Matcher {
+class SamePropsMatcher extends dartTest.Matcher {
   final Object _expected;
 
   const SamePropsMatcher(this._expected);
@@ -277,11 +277,11 @@ class SamePropsMatcher extends unit.Matcher {
     return compare(toData(_expected), toData(actual));
   }
 
-  unit.Description describeMismatch(item, unit.Description mismatchDescription,
+  dartTest.Description describeMismatch(item, dartTest.Description mismatchDescription,
       Map matchState, bool verbose) => mismatchDescription
       .add('is equal to ${toData(item)}. Expected: ${toData(_expected)}');
 
-  unit.Description describe(unit.Description description) =>
+  dartTest.Description describe(dartTest.Description description) =>
       description.add('has different properties');
 
   toData(obj) => new _ObjToData().call(obj);
@@ -325,7 +325,7 @@ class _ObjToData {
 }
 
 /// Matches when the object is an instance of [_type]
-class IsInstanceOf extends unit.Matcher {
+class IsInstanceOf extends dartTest.Matcher {
   final Type _type;
 
   const IsInstanceOf(this._type);
@@ -333,14 +333,14 @@ class IsInstanceOf extends unit.Matcher {
   bool matches(obj, Map matchState) =>
       mirrors.reflect(obj).type.reflectedType == _type;
 
-  unit.Description describe(unit.Description description) =>
+  dartTest.Description describe(dartTest.Description description) =>
       description.add('an instance of $_type');
 }
 
 Set _initializedSpecs = new Set();
 
-void unitTestInitSpecs(Suite suite) {
-  var r = new UnitTestVisitor(_initializedSpecs);
+void testInitSpecs(Suite suite) {
+  var r = new TestVisitor(_initializedSpecs);
   suite.visit(r);
 }
 

@@ -1,6 +1,6 @@
 library guinnessb;
 
-import 'package:test/test.dart' as unit;
+import 'package:test/test.dart' as dartTest;
 import 'package:collection/equality.dart';
 import 'dart:async' as async;
 import 'dart:mirrors' as mirrors;
@@ -23,5 +23,5 @@ class _Undefined {
 const _u = const _Undefined();
 
 final Guinnessb guinnessb = new Guinnessb(
-    matchers: new UnitTestMatchers(),
-    initSpecs: unitTestInitSpecs);
+    matchers: new TestMatchers(),
+    initSpecs: testInitSpecs);

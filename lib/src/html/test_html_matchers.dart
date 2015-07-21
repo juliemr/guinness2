@@ -1,33 +1,33 @@
 part of guinnessb_html;
 
-class UnitTestMatchersConfig {
+class TestMatchersConfig {
   Function preprocessHtml = (node) => node;
 }
 
-class UnitTestMatchersWithHtml extends gns.UnitTestMatchers
+class TestMatchersWithHtml extends gns.TestMatchers
     implements HtmlMatchers {
-  final UnitTestMatchersConfig config = new UnitTestMatchersConfig();
+  final TestMatchersConfig config = new TestMatchersConfig();
 
-  void toHaveHtml(actual, expected) => unit.expect(
+  void toHaveHtml(actual, expected) => dartTest.expect(
       htmlUtils.toHtml(actual, preprocess: config.preprocessHtml),
-      unit.equals(expected));
+      dartTest.equals(expected));
 
   void toHaveText(actual, expected) =>
-      unit.expect(htmlUtils.elementText(actual), unit.equals(expected));
+      dartTest.expect(htmlUtils.elementText(actual), dartTest.equals(expected));
 
   void toContainText(actual, expected) =>
-      unit.expect(htmlUtils.elementText(actual), unit.contains(expected));
+      dartTest.expect(htmlUtils.elementText(actual), dartTest.contains(expected));
 
-  void toHaveClass(actual, cls) => unit.expect(
+  void toHaveClass(actual, cls) => dartTest.expect(
       actual.classes.contains(cls), true,
       reason: ' Expected $actual to have css class "$cls"');
 
   void toHaveAttribute(actual, name, [value = null]) {
-    unit.expect(actual.attributes.containsKey(name), true,
+    dartTest.expect(actual.attributes.containsKey(name), true,
         reason: 'Epxected $actual to have attribute "$name"');
 
     if (value != null) {
-      unit.expect(actual.attributes[name], value,
+      dartTest.expect(actual.attributes[name], value,
           reason: 'Epxected $actual attribute "$name" to be "$value"');
     }
   }
@@ -37,24 +37,24 @@ class UnitTestMatchersWithHtml extends gns.UnitTestMatchers
     for (var option in actual.querySelectorAll('option')) {
       actualOptions.add(option.selected ? [option.value] : option.value);
     }
-    return unit.expect(actualOptions, options);
+    return dartTest.expect(actualOptions, options);
   }
 
-  void notToHaveHtml(actual, expected) => unit.expect(
+  void notToHaveHtml(actual, expected) => dartTest.expect(
       htmlUtils.toHtml(actual, preprocess: config.preprocessHtml),
-      unit.isNot(unit.equals(expected)));
+      dartTest.isNot(dartTest.equals(expected)));
 
-  void notToHaveText(actual, expected) => unit.expect(
-      htmlUtils.elementText(actual), unit.isNot(unit.equals(expected)));
+  void notToHaveText(actual, expected) => dartTest.expect(
+      htmlUtils.elementText(actual), dartTest.isNot(dartTest.equals(expected)));
 
-  void notToContainText(actual, expected) => unit.expect(
-      htmlUtils.elementText(actual), unit.isNot(unit.contains(expected)));
+  void notToContainText(actual, expected) => dartTest.expect(
+      htmlUtils.elementText(actual), dartTest.isNot(dartTest.contains(expected)));
 
-  void notToHaveClass(actual, cls) => unit.expect(
+  void notToHaveClass(actual, cls) => dartTest.expect(
       actual.classes.contains(cls), false,
       reason: ' Expected $actual not to have css class "$cls"');
 
-  void notToHaveAttribute(actual, name) => unit.expect(
+  void notToHaveAttribute(actual, name) => dartTest.expect(
       actual.attributes.containsKey(name), false,
       reason: 'Epxected $actual not to have attribute "$name"');
 }
