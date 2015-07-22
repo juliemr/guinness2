@@ -1,4 +1,4 @@
-library guinnessb;
+library guinness_2;
 
 import 'package:test/test.dart' as dartTest;
 import 'package:collection/equality.dart';
@@ -22,6 +22,6 @@ class _Undefined {
 }
 const _u = const _Undefined();
 
-final Guinnessb guinnessb = new Guinnessb(
+final Guinness guinness = new Guinness(
     matchers: new TestMatchers(),
     initSpecs: testInitSpecs);

@@ -1,7 +1,7 @@
-name: guinnessb
+name: guinness_2
 version: 0.0.1
 author: Julie Ralph <ju.ralph@gmail.com>
-homepage: https://github.com/juliemr/dart_test_bdd
+homepage: https://github.com/juliemr/guinness_2
 description: A port of the Jasmine testing framework.
 dependencies:
   collection: ">=0.9.1 <2.0.0"

@@ -1,4 +1,4 @@
-part of guinnessb_html;
+part of guinness_2_html;
 
 abstract class HtmlMatchers {
   void toHaveHtml(actual, expected);

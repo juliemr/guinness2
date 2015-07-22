@@ -1,4 +1,4 @@
-part of guinnessb_html;
+part of guinness_2_html;
 
 class Expect extends gns.Expect {
   Expect(actual) : super(actual);
@@ -13,7 +13,7 @@ class Expect extends gns.Expect {
       _m.toHaveAttribute(actual, name, value);
   void toEqualSelect(options) => _m.toEqualSelect(actual, options);
 
-  HtmlMatchers get _m => gns.guinnessb.matchers;
+  HtmlMatchers get _m => gns.guinness.matchers;
 }
 
 class NotExpect extends gns.NotExpect {
@@ -25,5 +25,5 @@ class NotExpect extends gns.NotExpect {
   void toHaveClass(cls) => _m.notToHaveClass(actual, cls);
   void toHaveAttribute(name) => _m.notToHaveAttribute(actual, name);
 
-  HtmlMatchers get _m => gns.guinnessb.matchers;
+  HtmlMatchers get _m => gns.guinness.matchers;
 }

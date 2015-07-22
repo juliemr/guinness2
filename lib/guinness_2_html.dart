@@ -1,16 +1,16 @@
-library guinnessb_html;
+library guinness_2_html;
 
-import 'guinnessb.dart' as gns;
+import 'guinness_2.dart' as gns;
 import 'package:test/test.dart' as dartTest;
 import 'src/html_utils.dart' as htmlUtils;
 
-export 'guinnessb.dart';
+export 'guinness_2.dart';
 
 part 'src/html/interfaces.dart';
 part 'src/html/expect.dart';
 part 'src/html/syntax.dart';
 part 'src/html/test_html_matchers.dart';
 
-void guinnessbEnableHtmlMatchers() {
-  gns.guinnessb.matchers = new TestMatchersWithHtml();
+void GuinnessEnableHtmlMatchers() {
+  gns.guinness.matchers = new TestMatchersWithHtml();
 }

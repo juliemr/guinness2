@@ -1,10 +1,10 @@
 @TestOn("browser")
 
-library guinnessb.test.html_utils_test;
+library guinness_2.test.html_utils_test;
 
 import 'dart:html';
 
-import 'package:guinnessb/src/html_utils.dart' as utils;
+import 'package:guinness_2/src/html_utils.dart' as utils;
 import 'package:test/test.dart';
 
 void main() {

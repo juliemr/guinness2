@@ -25,11 +25,11 @@ echo -------------------
 which dart
 which dartanalyzer
 which dartium
-dartanalyzer lib/guinnessb_html.dart
+dartanalyzer lib/guinness_2_html.dart
 
 if [ $? -ne 0 ]; then
   echo Dart analyzer failed
-  dartanalyzer lib/guinnessb_html.dart
+  dartanalyzer lib/guinness_2_html.dart
   exit 1
 fi
 

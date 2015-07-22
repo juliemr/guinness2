@@ -1,4 +1,4 @@
-part of guinnessb_html;
+part of guinness_2_html;
 
 Expect expect(actual, [matcher]) {
   final expect = new Expect(actual);

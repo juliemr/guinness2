@@ -1,4 +1,4 @@
-part of guinnessb;
+part of guinness_2;
 
 class ExclusiveVisitor implements SpecVisitor {
   bool containsExclusiveIt = false;
