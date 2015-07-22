@@ -16,7 +16,7 @@ You can find the Guinness installation instructions [here](http://pub.dartlang.o
 ## Importing the Library
 
 ```dart
-import 'package:guinness_2/guinness.dart';
+import 'package:guinness_2/guinness_2.dart';
 
 main() {
   // your specs
@@ -26,7 +26,7 @@ main() {
 If you are testing a client-side application, and you want to use html matchers, import the `guinness_html` library.
 
 ```dart
-import 'package:guinness_2/guinness_html.dart';
+import 'package:guinness_2/guinness_2_html.dart';
 
 main() {
   guinnessEnableHtmlMatchers();
@@ -39,7 +39,7 @@ main() {
 Guinness specs are comprised of `describe`, `it`, `beforeEach`, and `afterEach` blocks.
 
 ```dart
-import 'package:guinness_2/guinness.dart';
+import 'package:guinness_2/guinness_2.dart';
 
 main(){
   describe("syntax", () {
