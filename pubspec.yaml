@@ -5,7 +5,7 @@ homepage: https://github.com/juliemr/guinness_2
 description: A port of the Jasmine testing framework.
 dependencies:
   collection: ">=0.9.1 <2.0.0"
-  test: "0.12.3+7"
+  test: "^0.12.3"
 dev_dependencies:
   mockito: "0.10.1"
   browser: ">= 0.10.0 <1.0.0"
