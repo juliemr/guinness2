@@ -1,4 +1,4 @@
-part of guinness_2_html;
+part of guinness2_html;
 
 class Expect extends gns.Expect {
   Expect(actual) : super(actual);

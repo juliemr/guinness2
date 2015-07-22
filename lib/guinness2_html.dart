@@ -1,10 +1,10 @@
-library guinness_2_html;
+library guinness2_html;
 
-import 'guinness_2.dart' as gns;
+import 'guinness2.dart' as gns;
 import 'package:test/test.dart' as dartTest;
 import 'src/html_utils.dart' as htmlUtils;
 
-export 'guinness_2.dart';
+export 'guinness2.dart';
 
 part 'src/html/interfaces.dart';
 part 'src/html/expect.dart';

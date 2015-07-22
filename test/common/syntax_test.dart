@@ -1,19 +1,19 @@
-library guinness_2.test.syntax_test;
+library guinness2.test.syntax_test;
 
-import 'package:guinness_2/guinness_2.dart' as guinness_2;
+import 'package:guinness2/guinness2.dart' as guinness2;
 import 'package:test/test.dart';
 
 void main() {
   var context;
 
   setUp(() {
-    context = new guinness_2.Context();
-    guinness_2.guinness.resetContext(context);
+    context = new guinness2.Context();
+    guinness2.guinness.resetContext(context);
   });
 
   group("[describe]", () {
     test("adds a describe to the current describe block", () {
-      guinness_2.describe("new describe", () {});
+      guinness2.describe("new describe", () {});
 
       final actualDescribe = context.suite.children.first;
 
@@ -25,7 +25,7 @@ void main() {
     test(
         "adds a describe to the current describe block with excluded set to true",
         () {
-      guinness_2.xdescribe("new xdescribe", () {});
+      guinness2.xdescribe("new xdescribe", () {});
 
       final actualDescribe = context.suite.children.first;
 
@@ -38,7 +38,7 @@ void main() {
     test(
         "adds a describe to the current describe block with exclusive set to true",
         () {
-      guinness_2.ddescribe("new ddescribe", () {});
+      guinness2.ddescribe("new ddescribe", () {});
 
       final actualDescribe = context.suite.children.first;
 
@@ -49,7 +49,7 @@ void main() {
 
   group("[it]", () {
     test("adds an `it` to the current describe block", () {
-      guinness_2.it("new it", () {});
+      guinness2.it("new it", () {});
 
       final actualIt = context.suite.children.first;
 
@@ -62,7 +62,7 @@ void main() {
   group("[xit]", () {
     test("adds an `it` to the current describe block with excluded set to true",
         () {
-      guinness_2.xit("new xit", () {});
+      guinness2.xit("new xit", () {});
 
       final actualIt = context.suite.children.first;
 
@@ -75,7 +75,7 @@ void main() {
     test(
         "adds an `it` to the current describe block with exclusive set to true",
         () {
-      guinness_2.iit("new iit", () {});
+      guinness2.iit("new iit", () {});
 
       final actualIt = context.suite.children.first;
 
@@ -86,14 +86,14 @@ void main() {
 
   group("[beforeEach]", () {
     test("adds a before each fn to the current describe block", () {
-      guinness_2.beforeEach(() {});
+      guinness2.beforeEach(() {});
 
       expect(context.suite.beforeEachFns.length, equals(1));
       expect(context.suite.beforeEachFns[0].priority, equals(0));
     });
 
     test("supports different priorities", () {
-      guinness_2.beforeEach(() {}, priority: 2);
+      guinness2.beforeEach(() {}, priority: 2);
 
       expect(context.suite.beforeEachFns[0].priority, equals(2));
     });
@@ -101,24 +101,24 @@ void main() {
 
   group("[afterEach]", () {
     test("adds a after each fn to the current describe block", () {
-      guinness_2.afterEach(() {});
+      guinness2.afterEach(() {});
 
       expect(context.suite.afterEachFns.length, equals(1));
       expect(context.suite.afterEachFns[0].priority, equals(0));
     });
 
     test("supports different priorities", () {
-      guinness_2.afterEach(() {}, priority: 2);
+      guinness2.afterEach(() {}, priority: 2);
 
       expect(context.suite.afterEachFns[0].priority, equals(2));
     });
   });
 
   test("handles nested describes and its", () {
-    guinness_2.describe("outer describe", () {
-      guinness_2.it("outer it", () {});
-      guinness_2.describe("inner describe", () {
-        guinness_2.it("inner it", () {});
+    guinness2.describe("outer describe", () {
+      guinness2.it("outer it", () {});
+      guinness2.describe("inner describe", () {
+        guinness2.it("inner it", () {});
       });
     });
 
@@ -136,14 +136,14 @@ void main() {
 
   group("[expect]", () {
     test("creates an Expect object", () {
-      final e = guinness_2.expect("actual");
+      final e = guinness2.expect("actual");
 
       expect(e.actual, equals("actual"));
     });
 
     test("executes the given matcher", () {
       expect(() {
-        guinness_2.expect(true, isFalse);
+        guinness2.expect(true, isFalse);
       }, throws);
     });
   });

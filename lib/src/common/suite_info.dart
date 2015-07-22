@@ -1,4 +1,4 @@
-part of guinness_2;
+part of guinness2;
 
 _suiteInfo(Suite suite) {
   final visitor = new _SuiteInfoVisitor();

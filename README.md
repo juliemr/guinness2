@@ -1,4 +1,4 @@
-# Guinness2 [![Build Status](https://travis-ci.org/juliemr/guinness_2.svg?branch=master)](https://travis-ci.org/juliemr/guinness_2)
+# Guinness2 [![Build Status](https://travis-ci.org/juliemr/guinness2.svg?branch=master)](https://travis-ci.org/juliemr/guinness2)
 
 Guinness2 is a port of the Jasmine library to Dart. It is based on the AngularDart implementation of Jasmine, and similar to [Guinness](https://github.com/vsavkin/guinness) but for dart:test instead of dart:unittest.
 
@@ -11,12 +11,12 @@ showStats option.
 
 ## Installation
 
-You can find the Guinness installation instructions [here](http://pub.dartlang.org/packages/guinness_2#installing).
+You can find the Guinness installation instructions [here](http://pub.dartlang.org/packages/guinness2#installing).
 
 ## Importing the Library
 
 ```dart
-import 'package:guinness_2/guinness_2.dart';
+import 'package:guinness2/guinness2.dart';
 
 main() {
   // your specs
@@ -26,7 +26,7 @@ main() {
 If you are testing a client-side application, and you want to use html matchers, import the `guinness_html` library.
 
 ```dart
-import 'package:guinness_2/guinness_2_html.dart';
+import 'package:guinness2/guinness2_html.dart';
 
 main() {
   guinnessEnableHtmlMatchers();
@@ -39,7 +39,7 @@ main() {
 Guinness specs are comprised of `describe`, `it`, `beforeEach`, and `afterEach` blocks.
 
 ```dart
-import 'package:guinness_2/guinness_2.dart';
+import 'package:guinness2/guinness2.dart';
 
 main(){
   describe("syntax", () {

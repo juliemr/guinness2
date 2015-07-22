@@ -1,11 +1,11 @@
 @TestOn("browser")
 
-library guinness_2.test.test_backend_test;
+library guinness2.test.test_backend_test;
 
 import 'dart:html' as html;
 
 import 'package:mockito/mockito.dart';
-import 'package:guinness_2/guinness_2_html.dart' as guinness_2;
+import 'package:guinness2/guinness2_html.dart' as guinness2;
 import 'package:test/test.dart';
 
 import '../test_utils.dart';
@@ -36,7 +36,7 @@ void main() {
 
     setUp(() {
       dartTest = new MockTest();
-      visitor = new guinness_2.TestVisitor(new Set(), dartTest: dartTest);
+      visitor = new guinness2.TestVisitor(new Set(), dartTest: dartTest);
     });
 
     tearDown(() {
@@ -115,7 +115,7 @@ void main() {
   });
 
   group("[TestMatchers]", () {
-    final matchers = new guinness_2.TestMatchersWithHtml();
+    final matchers = new guinness2.TestMatchersWithHtml();
 
     test("toBe", () {
       var x = [1, 2];
@@ -279,7 +279,7 @@ void main() {
     });
 
     test("toHaveBeenCalled", () {
-      final spy = new guinness_2.SpyFunction("");
+      final spy = new guinness2.SpyFunction("");
 
       assertFalse(() => matchers.toHaveBeenCalled(spy));
 
@@ -289,7 +289,7 @@ void main() {
     });
 
     test("toHaveBeenCalledOnce", () {
-      final spy = new guinness_2.SpyFunction("");
+      final spy = new guinness2.SpyFunction("");
 
       assertFalse(() => matchers.toHaveBeenCalledOnce(spy));
 
@@ -303,7 +303,7 @@ void main() {
     });
 
     test("toHaveBeenCalledWith", () {
-      final spy = new guinness_2.SpyFunction("");
+      final spy = new guinness2.SpyFunction("");
 
       assertFalse(() => matchers.toHaveBeenCalledWith(spy, 1, 2));
 
@@ -314,7 +314,7 @@ void main() {
     });
 
     test("toHaveBeenCalledOnceWith", () {
-      final spy = new guinness_2.SpyFunction("");
+      final spy = new guinness2.SpyFunction("");
 
       assertFalse(() => matchers.toHaveBeenCalledOnceWith(spy, 1, 2));
 
@@ -413,7 +413,7 @@ void main() {
     });
 
     test("notToHaveBeenCalled", () {
-      final spy = new guinness_2.SpyFunction("");
+      final spy = new guinness2.SpyFunction("");
 
       assertTrue(() => matchers.notToHaveBeenCalled(spy));
 
@@ -423,7 +423,7 @@ void main() {
     });
 
     test("notToHaveBeenCalledWith", () {
-      final spy = new guinness_2.SpyFunction("");
+      final spy = new guinness2.SpyFunction("");
 
       assertTrue(() => matchers.notToHaveBeenCalledWith(spy, 1, 2));
 

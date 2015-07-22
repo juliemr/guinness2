@@ -1,18 +1,18 @@
-library guinness_2.test.exclusive_visitor_test;
+library guinness2.test.exclusive_visitor_test;
 
-import 'package:guinness_2/guinness_2.dart' as guinness_2;
+import 'package:guinness2/guinness2.dart' as guinness2;
 import 'package:test/test.dart';
 
 import '../test_utils.dart';
 
 bool _containsExclusiveIt(suite) {
-  final v = new guinness_2.ExclusiveVisitor();
+  final v = new guinness2.ExclusiveVisitor();
   v.visitSuite(suite);
   return v.containsExclusiveIt;
 }
 
 bool _containsExclusiveDescribe(suite) {
-  final v = new guinness_2.ExclusiveVisitor();
+  final v = new guinness2.ExclusiveVisitor();
   v.visitSuite(suite);
   return v.containsExclusiveDescribe;
 }

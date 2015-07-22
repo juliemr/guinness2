@@ -1,22 +1,22 @@
-library guinness_2.test.integration_test;
+library guinness2.test.integration_test;
 
 import 'dart:async';
 
-import 'package:guinness_2/guinness_2.dart' as guinness_2;
+import 'package:guinness2/guinness2.dart' as guinness2;
 import 'package:test/test.dart';
 
-class DummyVisitor implements guinness_2.SpecVisitor {
+class DummyVisitor implements guinness2.SpecVisitor {
   List<Future> allFutures = [];
 
-  void visitSuite(guinness_2.Suite suite) {
+  void visitSuite(guinness2.Suite suite) {
     suite.children.forEach((c) => c.visit(this));
   }
 
-  void visitDescribe(guinness_2.Describe describe) {
+  void visitDescribe(guinness2.Describe describe) {
     describe.children.forEach((c) => c.visit(this));
   }
 
-  void visitIt(guinness_2.It it) {
+  void visitIt(guinness2.It it) {
     allFutures.add(it.withSetupAndTeardown());
   }
 
@@ -36,20 +36,20 @@ main() {
   }
 
   setUp(() {
-    context = new guinness_2.Context();
-    guinness_2.guinness.resetContext(context);
+    context = new guinness2.Context();
+    guinness2.guinness.resetContext(context);
   });
 
   test("runs specs once", () {
     var log = [];
 
-    guinness_2.describe("outer describe", () {
-      guinness_2.it("outer it", () {
+    guinness2.describe("outer describe", () {
+      guinness2.it("outer it", () {
         log.add("outer it");
       });
 
-      guinness_2.describe("inner describe", () {
-        guinness_2.it("inner it", () {
+      guinness2.describe("inner describe", () {
+        guinness2.it("inner it", () {
           log.add("inner it");
         });
       });
@@ -63,25 +63,25 @@ main() {
   test("runs beforeEach and afterEach blocks", () {
     var log = [];
 
-    guinness_2.describe("outer describe", () {
-      guinness_2.beforeEach(() {
+    guinness2.describe("outer describe", () {
+      guinness2.beforeEach(() {
         log.add("outer beforeEach");
       });
 
-      guinness_2.afterEach(() {
+      guinness2.afterEach(() {
         log.add("outer afterEach");
       });
 
-      guinness_2.describe("inner describe", () {
-        guinness_2.beforeEach(() {
+      guinness2.describe("inner describe", () {
+        guinness2.beforeEach(() {
           log.add("inner beforeEach");
         });
 
-        guinness_2.afterEach(() {
+        guinness2.afterEach(() {
           log.add("inner afterEach");
         });
 
-        guinness_2.it("inner it", () {
+        guinness2.it("inner it", () {
           log.add("inner it");
         });
       });
@@ -106,15 +106,15 @@ main() {
         log.add(message);
       });
 
-      guinness_2.describe("outer describe", () {
-        guinness_2.beforeEach(() => futurePrinting("outer beforeEach"));
-        guinness_2.afterEach(() => futurePrinting("outer afterEach"));
+      guinness2.describe("outer describe", () {
+        guinness2.beforeEach(() => futurePrinting("outer beforeEach"));
+        guinness2.afterEach(() => futurePrinting("outer afterEach"));
 
-        guinness_2.describe("inner describe", () {
-          guinness_2.beforeEach(() => futurePrinting("inner beforeEach"));
-          guinness_2.afterEach(() => futurePrinting("inner afterEach"));
+        guinness2.describe("inner describe", () {
+          guinness2.beforeEach(() => futurePrinting("inner beforeEach"));
+          guinness2.afterEach(() => futurePrinting("inner afterEach"));
 
-          guinness_2.it("inner it", () => futurePrinting("inner it"));
+          guinness2.it("inner it", () => futurePrinting("inner it"));
         });
       });
 
@@ -131,13 +131,13 @@ main() {
   });
 
   test("pending describes and its", () {
-    guinness_2.describe("pending describe");
-    guinness_2.xdescribe("pending excluded describe");
-    guinness_2.ddescribe("pending exclusive describe");
+    guinness2.describe("pending describe");
+    guinness2.xdescribe("pending excluded describe");
+    guinness2.ddescribe("pending exclusive describe");
 
-    guinness_2.it("pending it");
-    guinness_2.xit("pending exlcluded it");
-    guinness_2.iit("pending exclusive it");
+    guinness2.it("pending it");
+    guinness2.xit("pending exlcluded it");
+    guinness2.iit("pending exclusive it");
     verify(() {});
   });
 }

@@ -1,21 +1,21 @@
-library guinness_2.test_utils;
+library guinness2.test_utils;
 
-import 'package:guinness_2/guinness_2.dart' as guinness_2;
+import 'package:guinness2/guinness2.dart' as guinness2;
 
 final _context = new _DummyContext();
 
 noop() {}
 
-createSuite() => new guinness_2.Suite(_context);
+createSuite() => new guinness2.Suite(_context);
 
 createDescribe({bool exclusive: false, bool excluded: false, parent,
-    Function func: noop, String name: ""}) => new guinness_2.Describe(
+    Function func: noop, String name: ""}) => new guinness2.Describe(
     name, parent, _context, func, exclusive: exclusive, excluded: excluded);
 
 createIt({bool exclusive: false, bool excluded: false, parent,
-    Function func: noop, String name: ""}) => new guinness_2.It(
+    Function func: noop, String name: ""}) => new guinness2.It(
     name, parent, func, exclusive: exclusive, excluded: excluded);
 
-class _DummyContext implements guinness_2.Context {
-  withDescribe(guinness_2.Describe describe, Function definition) {}
+class _DummyContext implements guinness2.Context {
+  withDescribe(guinness2.Describe describe, Function definition) {}
 }

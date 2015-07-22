@@ -1,4 +1,4 @@
-part of guinness_2_html;
+part of guinness2_html;
 
 class TestMatchersConfig {
   Function preprocessHtml = (node) => node;

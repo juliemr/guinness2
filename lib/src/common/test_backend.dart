@@ -1,4 +1,4 @@
-part of guinness_2;
+part of guinness2;
 
 class TestAdapter {
   const TestAdapter();

@@ -2,7 +2,7 @@
 
 library example;
 
-import 'package:guinness_2/guinness_2_html.dart';
+import 'package:guinness2/guinness2_html.dart';
 import 'dart:html';
 
 class TestClass {}
@@ -10,7 +10,7 @@ class TestClass {}
 main() {
   GuinnessEnableHtmlMatchers();
 
-  describe("guinness_2", () {
+  describe("guinness2", () {
     it("has various built-in matchers", () {
       expect(2).toEqual(2);
 

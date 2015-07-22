@@ -1,4 +1,4 @@
-library guinness_2;
+library guinness2;
 
 import 'package:test/test.dart' as dartTest;
 import 'package:collection/equality.dart';

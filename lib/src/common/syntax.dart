@@ -1,4 +1,4 @@
-part of guinness_2;
+part of guinness2;
 
 void beforeEach(Function fn, {int priority: 0}) =>
     guinness._context.addBeforeEach(fn, priority: priority);

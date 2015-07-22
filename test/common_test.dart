@@ -1,6 +1,6 @@
-library guinness_2.test.common_tests;
+library guinness2.test.common_tests;
 
-import 'package:guinness_2/guinness_2.dart';
+import 'package:guinness2/guinness2.dart';
 import 'package:test/test.dart';
 
 import 'common/exclusive_visitor_test.dart' as exclusive_visitor;
