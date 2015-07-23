@@ -54,14 +54,6 @@ void main() {
       verify(dartTest.group(any, any));
     });
 
-    test('only adds exclusive describe', () {
-      final suite = createSuite()..add(createDescribe(exclusive: true))
-          ..add(createDescribe());
-
-      visitor.visitSuite(suite);
-      verify(dartTest.group(any, any)).called(1);
-    });
-
     test('skips excluded describes', () {
       final suite = createSuite()..add(createDescribe(excluded: true));
 
