@@ -4,10 +4,10 @@ author: Julie Ralph <ju.ralph@gmail.com>
 homepage: https://github.com/juliemr/guinness2
 description: A port of the Jasmine testing framework.
 dependencies:
-  collection: ">=0.9.1 <2.0.0"
-  test: "^0.12.3"
+  collection: ">=1.4.0 <2.0.0"
+  test: "^0.12.9"
 dev_dependencies:
-  mockito: "0.10.1"
+  mockito: "0.11.0"
   browser: ">= 0.10.0 <1.0.0"
 environment:
-  sdk: ">=1.9.0 <2.0.0"
+  sdk: ">=1.13.0 <2.0.0"

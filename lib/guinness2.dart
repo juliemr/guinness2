@@ -6,6 +6,8 @@ import 'dart:async' as async;
 import 'dart:mirrors' as mirrors;
 import 'dart:math' as math;
 
+export 'package:test/test.dart' show TestOn;
+
 part 'src/common/model.dart';
 part 'src/common/context.dart';
 part 'src/common/syntax.dart';
