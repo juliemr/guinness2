@@ -33,14 +33,41 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-
-echo -------------------
-echo "Pub run test"
-echo -------------------
 sh -e /etc/init.d/xvfb start
-pub run test -p dartium
 
-echo -------------------
-echo "Pub run test examples"
-echo -------------------
-pub run test example/example.dart -p dartium
+function testAndVerifyOutput {
+  echo ----------------
+  echo "Executing command"
+  echo $1
+  echo ""
+  res=$($1)
+  echo "$res"
+  echo ""
+  results_line=`echo "$res" | tail -1`
+  if [[ "$results_line" == *"$2"* ]]
+  then
+    echo "passed with correct expected output";
+  else
+    echo "ERROR: Expected [$results_line]"
+    echo "to match [$2]"
+    exit 1;
+  fi
+}
+
+set +e
+
+testAndVerifyOutput "pub run test test_e2e/common -r expanded --no-color" "+7: All tests passed"
+
+testAndVerifyOutput "pub run test test_e2e/html -r expanded --no-color" "No tests ran"
+
+testAndVerifyOutput "pub run test test_e2e/html -p dartium -r expanded --no-color" "+1: All tests passed"
+
+# TODO - uncomment when focused tests are working.
+
+# testAndVerifyOutput "pub run test test_e2e/focused -r expanded --no-color" "+1 All tests passed"
+
+# testAndVerifyOutput "pub run test test_e2e/focused_describe -r expanded --no-color" "+2 All tests passed"
+
+testAndVerifyOutput "pub run test -p dartium -r expanded --no-color" "+312: All tests passed"
+
+testAndVerifyOutput "pub run test example/example.dart -p dartium -r expanded --no-color" "+6: All tests passed"
