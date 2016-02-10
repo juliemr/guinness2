@@ -1,5 +1,7 @@
 language: dart
 before_install:
   - export DISPLAY=:99.0
+before_script:
+  - ./scripts/travis/setup.sh
 script:
   - ./scripts/travis/run_tests.sh
