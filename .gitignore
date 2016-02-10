@@ -1,6 +1,4 @@
-.idea
-pubspec.lock
 .packages
-packages
 .pub
-dartium/
+packages
+pubspec.lock

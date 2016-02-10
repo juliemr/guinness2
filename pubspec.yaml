@@ -1,5 +1,5 @@
 name: guinness2
-version: 0.0.2
+version: 0.1.0-dev
 author: Julie Ralph <ju.ralph@gmail.com>
 homepage: https://github.com/juliemr/guinness2
 description: A port of the Jasmine testing framework.
