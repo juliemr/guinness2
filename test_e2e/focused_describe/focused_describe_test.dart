@@ -1,14 +1,14 @@
 import 'package:guinness2/guinness2.dart';
 
 main() {
-  ddescribe('exclusive describe', () {
+  ddescribe('focused describe', () {
     it('should run', () {
       expect(2).toEqual(2);
     });
   });
 
   describe('wrapper', () {
-    ddescribe('nested exclusive describe', () {
+    ddescribe('nested focused describe', () {
       it('should run', () {
         expect(3).toEqual(3);
       });
