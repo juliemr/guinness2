@@ -8,8 +8,6 @@ import 'package:mockito/mockito.dart';
 import 'package:guinness2/guinness2_html.dart' as guinness2;
 import 'package:test/test.dart';
 
-import '../test_utils.dart';
-
 assertTrue(Function fn) => expect(fn, returnsNormally);
 assertFalse(Function fn) => expect(fn, throws);
 
@@ -31,81 +29,6 @@ class MockTest extends Mock {
 }
 
 void main() {
-  group("[TestVisitor]", () {
-    var visitor, dartTest;
-
-    setUp(() {
-      dartTest = new MockTest();
-      visitor = new guinness2.TestVisitor(new Set(), dartTest: dartTest);
-    });
-
-    tearDown(() {
-      verifyNoMoreInteractions(dartTest);
-    });
-
-    test('handles an empty suite', () {
-      visitor.visitSuite(createSuite());
-    });
-
-    test('uses group for describe', () {
-      final suite = createSuite()..add(createDescribe());
-
-      visitor.visitSuite(suite);
-      verify(dartTest.group(any, any));
-    });
-
-    test('skips excluded describes', () {
-      final suite = createSuite()..add(createDescribe(excluded: true));
-
-      visitor.visitSuite(suite);
-    });
-
-    test('uses test for it', () {
-      final suite = createSuite()..add(createIt());
-
-      visitor.visitSuite(suite);
-      verify(dartTest.test(any, any));
-    });
-
-    test('only adds exclusive it', () {
-      final suite = createSuite()..add(createIt(exclusive: true))
-          ..add(createIt());
-
-      visitor.visitSuite(suite);
-      verify(dartTest.test(any, any)).called(1);
-    });
-
-    test('skips excluded its', () {
-      final suite = createSuite()..add(createIt(excluded: true));
-
-      visitor.visitSuite(suite);
-    });
-
-    test('runs only exlusive its', () {
-      final suite = createSuite();
-      var exclusiveDescribe = createDescribe(exclusive: true);
-      var exclusiveIt = createIt(exclusive: true);
-      var otherIt = createIt(parent: exclusiveDescribe);
-      suite..add(exclusiveDescribe)..add(exclusiveIt);
-
-      visitor.visitSuite(suite);
-      verify(dartTest.group(any, any));
-      verify(dartTest.test(any, any));
-    });
-
-    test("initializes specs only once", () {
-      final suite = createSuite()
-        ..add(createIt())
-        ..add(createDescribe());
-
-      visitor.visitSuite(suite);
-
-      visitor.visitSuite(suite);
-      verify(dartTest.test(any, any));
-      verify(dartTest.group(any, any));
-    });
-  });
-
   group("[TestMatchers]", () {
     final matchers = new guinness2.TestMatchersWithHtml();
 

@@ -18,4 +18,7 @@ main() {
   xit('skipped spec should not run', () {
     expect(1).toEqual(2);
   });
+
+  it('test without function should count as skipped');
+  describe('describe without function should count as skipped');
 }

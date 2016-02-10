@@ -8,7 +8,7 @@ import 'dart:html';
 class TestClass {}
 
 main() {
-  GuinnessEnableHtmlMatchers();
+  guinnessEnableHtmlMatchers();
 
   describe("guinness2", () {
     it("has various built-in matchers", () {

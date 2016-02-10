@@ -1,13 +1,5 @@
 part of guinness2;
 
-typedef void SpecRunner(Suite suite);
-
-abstract class SpecVisitor {
-  void visitSuite(Suite suite);
-  void visitDescribe(Describe describe);
-  void visitIt(It it);
-}
-
 abstract class Matchers {
   dynamic get config;
 

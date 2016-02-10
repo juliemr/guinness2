@@ -1,81 +1,5 @@
 part of guinness2;
 
-class TestAdapter {
-  const TestAdapter();
-  void group(String name, Function fn) => dartTest.group(name, fn);
-  void test(String name, Function fn) => dartTest.test(name, fn);
-}
-
-class TestVisitor implements SpecVisitor {
-  bool containsExclusiveIt = false;
-  bool containsExclusiveDescribe = false;
-  Set initializedSpecs;
-  dynamic dartTest;
-
-  TestVisitor(this.initializedSpecs, {this.dartTest: const TestAdapter()});
-
-  void visitSuite(Suite suite) {
-    final v = new ExclusiveVisitor();
-    v.visitSuite(suite);
-    // v now has containsExclusiveIt and containsExclusiveDescibe properties for the whole suite
-
-    containsExclusiveIt = v.containsExclusiveIt;
-
-    // If there is an exclusive it, ignore exclusive describes.
-    containsExclusiveDescribe = !containsExclusiveIt && v.containsExclusiveDescribe;
-
-    if (containsExclusiveDescribe) {
-      _visitChildDescribes(suite.children);
-    } else {
-      _visitChildren(suite.children);
-    }
-  }
-
-  void visitDescribe(Describe describe) {
-    _once(describe, () {
-      if (describe.excluded) return;
-
-      // If there exists an exclusive describe, and this isn't it, only look
-      // at children that are instances of Describe.
-      if (containsExclusiveDescribe && !describe.exclusive) {
-        _visitChildDescribes(describe.children);
-      }
-
-      dartTest.group(describe.name, () {
-        _visitChildren(describe.children);
-      });
-    });
-  }
-
-  void visitIt(It it) {
-    _once(it, () {
-      if (it.excluded) return;
-
-      if (containsExclusiveIt && !it.exclusive) return;
-
-      dartTest.test(it.name, it.withSetupAndTeardown);
-    });
-  }
-
-  _visitChildren(children) {
-    children.forEach((c) => c.visit(this));
-  }
-
-  _visitChildDescribes(children) {
-    children.forEach((c) {
-      if (c is Describe) {
-        c.visit(this);
-      }
-    });
-  }
-
-  _once(spec, Function func) {
-    if (initializedSpecs.contains(spec)) return;
-    func();
-    initializedSpecs.add(spec);
-  }
-}
-
 class TestMatchers implements Matchers {
   get config => {};
 
@@ -347,13 +271,6 @@ class IsInstanceOf extends dartTest.Matcher {
 
   dartTest.Description describe(dartTest.Description description) =>
       description.add('an instance of $_type');
-}
-
-Set _initializedSpecs = new Set();
-
-void testInitSpecs(Suite suite) {
-  var r = new TestVisitor(_initializedSpecs);
-  suite.visit(r);
 }
 
 bool get _isDart2js => identical(1, 1.0);

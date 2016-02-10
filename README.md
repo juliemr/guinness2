@@ -7,7 +7,7 @@ Guinness2 is a port of the Jasmine library to Dart. It is based on the AngularDa
 Backed by `dart:test` instead of `dart:unittest`. Run via `pub run test` instead of a Karma setup.
 
 Removed bits referring to 'runner' programatically - just use `pub run test`. Removed deprecated
-showStats option.
+showStats option. Remove all context-keeping, as this is now handles by package:test directly.
 
 ## Installation
 
@@ -41,7 +41,7 @@ Guinness specs are comprised of `describe`, `it`, `beforeEach`, and `afterEach` 
 ```dart
 import 'package:guinness2/guinness2.dart';
 
-main(){
+main() {
   describe("syntax", () {
     beforeEach(() {
       print("outer before");
@@ -81,8 +81,7 @@ This will print:
 * To exclude an `it`, change it to `xit`.
 * To make a `describe` exclusive, change it to `ddescribe`.
 * To make an `it` exclusive, change it to `iit`.
-
-If there is an `iit` in your spec files, Guinness will run only `iit`s. In this case `ddescribe`s will be ignored.
+* *Important:* to run exclusive tests, add `--tags solo` to your command line invocation.
 
 
 ### Pending Specs
@@ -92,11 +91,9 @@ Guinness supports pending describe and it blocks (blocks without a callback).
 ```dart
 describe("pending describe");
 xdescribe("pending xdescribe");
-ddescribe("pending ddescribe");
 
 it("pending it");
 xit("pending xit");
-iit("pending iit");
 ```
 
 ## Async
@@ -264,29 +261,13 @@ expect(s.invoke(1,2)).toEqual(3);
 
 You can also use the `mock` and `dart_mocks` libraries with it.
 
-## Status
-
-There are a few things that are still not supported (e.g., handling named parameters in expectations).
 
 ## Implementation Details
 
 ### Key Ideas
 
-The main idea is to treat the Jasmine syntax as a domain specific language. Therefore,
-the implementation clearly  separates such things as: syntax, semantic model, and execution model. Let's quickly look
-  at the benefits this approach provides:
+Dart's `package:test` supports most of the original Guinness test organization natively,
+so we simply forward to the appropriate `package:test` function. 
 
-#### The semantic model is separate from the syntax.
-
-The semantic model consists of It, Describe, Suite, BeforeEach, and AfterEach objects. You can create and analyse
-them  without using the context-dependent nested Jasmine syntax.
-
-#### The parsing of specs is separate from the execution of specs.
-
-The library builds a tree of the It, Describe, Suite, BeforeEach, and AfterEach objects first. And after that,
-as a  separate step, executes them. It enables all sorts of preprocessing (e.g., filtering, reordering).
-
-#### Pluggable backends.
-
-Since the library is a DSL, there can be multiple backend libraries actually executing the specs. By default,
-the  library comes with the test backend.
+The large exception is expectations, matchers, and spies, which are unchanged
+from original Guinness.

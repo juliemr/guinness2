@@ -56,7 +56,7 @@ function testAndVerifyOutput {
 
 set +e
 
-testAndVerifyOutput "pub run test test_e2e/common -r expanded --no-color" "+7: All tests passed"
+testAndVerifyOutput "pub run test test_e2e/common -r expanded --no-color" "+7 ~3: All tests passed"
 
 testAndVerifyOutput "pub run test test_e2e/html -r expanded --no-color" "No tests ran"
 
@@ -64,10 +64,10 @@ testAndVerifyOutput "pub run test test_e2e/html -p dartium -r expanded --no-colo
 
 # TODO - uncomment when focused tests are working.
 
-# testAndVerifyOutput "pub run test test_e2e/focused -r expanded --no-color" "+1 All tests passed"
+testAndVerifyOutput "pub run test test_e2e/focused --tags solo -r expanded --no-color" "+1: All tests passed"
 
-# testAndVerifyOutput "pub run test test_e2e/focused_describe -r expanded --no-color" "+2 All tests passed"
+testAndVerifyOutput "pub run test test_e2e/focused_describe --tags solo -r expanded --no-color" "+2: All tests passed"
 
-testAndVerifyOutput "pub run test -p dartium -r expanded --no-color" "+312: All tests passed"
+testAndVerifyOutput "pub run test -p dartium -r expanded --no-color" "+75: All tests passed"
 
-testAndVerifyOutput "pub run test example/example.dart -p dartium -r expanded --no-color" "+6: All tests passed"
+testAndVerifyOutput "pub run test example/example.dart -p dartium -r expanded --no-color" "+5 ~4: All tests passed"
