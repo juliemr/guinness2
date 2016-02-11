@@ -1,4 +1,4 @@
-# v0.0.3 (2016-02-11)
+# v0.0.4 (2016-02-11)
 
 - BREAKING CHANGE:
   `iit` and `ddescribe` NO LONGER modify which tests will run. Instead,
