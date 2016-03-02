@@ -1,3 +1,7 @@
+# v0.0.5 (2016-03-02)
+
+- Fixed equality check for nested lists.
+
 # v0.0.4 (2016-02-11)
 
 - BREAKING CHANGE:
