@@ -68,6 +68,6 @@ testAndVerifyOutput "pub run test test_e2e/focused --tags solo -r expanded --no-
 
 testAndVerifyOutput "pub run test test_e2e/focused_describe --tags solo -r expanded --no-color" "+2: All tests passed"
 
-testAndVerifyOutput "pub run test -p dartium -r expanded --no-color" "+75: All tests passed"
+testAndVerifyOutput "pub run test -p dartium -r expanded --no-color" "+76: All tests passed"
 
 testAndVerifyOutput "pub run test example/example.dart -p dartium -r expanded --no-color" "+5 ~4: All tests passed"
